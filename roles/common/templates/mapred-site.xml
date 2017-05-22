@@ -1,0 +1,96 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<!--
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License. See accompanying LICENSE file.
+-->
+
+<!-- Put site-specific property overrides in this file. -->
+
+<configuration>
+<property>
+  <name>mapreduce.task.timeout</name>  
+  <value>3600000</value>
+</property>
+<property>
+  <name>mapreduce.map.output.compress</name>  
+  <value>true</value>
+</property>
+<property>
+  <name>mapred.map.output.compress.codec</name>  
+  <value>org.apache.hadoop.io.compress.SnappyCodec</value>
+</property>
+  <property>
+    <name>mapreduce.framework.name</name>
+    <value>yarn</value>
+  </property>
+  <property>
+    <name>mapreduce.job.maxtaskfailures.per.tracker</name>
+    <value>1000</value>
+  </property>
+  <property>
+    <name>mapreduce.map.maxattempts</name>
+    <value>40</value>
+  </property>
+  <property>
+    <name>mapreduce.reduce.maxattempts</name>
+    <value>40</value>
+  </property>
+  <property>
+    <name>mapred.reduce.slowstart.completed.maps</name>
+    <value>1.00</value>
+  </property>
+  <property>
+    <name>mapreduce.application.classpath</name>
+    <value>/root/hadoop/hadoop-2.7.3/share/hadoop/mapreduce/*,/root/hadoop/hadoop-2.7.3/share/hadoop/mapreduce/lib/*,/root/hadoop/hadoop-2.7.3/share/hadoop/tools/lib/*</value>
+  </property>
+  <property>
+    <name>yarn.nodemanager.aux-services</name>
+    <value>mapreduce_shuffle</value>
+  </property>
+  <property>
+    <name>mapreduce.map.memory.mb</name>
+    <value>3500</value>
+  </property>
+  <property>
+    <name>mapreduce.map.java.opts</name>
+    <value>-Xmx3000M</value>
+  </property>
+  <property>
+    <name>mapreduce.reduce.memory.mb</name>
+    <value>9000</value>
+  </property>
+  <property>
+    <name>mapreduce.reduce.java.opts</name>
+    <value>-Xmx8000M</value>
+  </property>
+  <property>
+    <name>mapreduce.task.io.sort.factor</name>
+    <value>240</value>
+  </property>
+  <property>
+    <name>mapreduce.task.io.sort.mb</name>
+    <value>512</value>
+  </property>
+  <property>
+    <name>mapreduce.jobhistory.address</name>
+    <value>HEAD:10020</value>
+  </property>
+  <property>
+    <name>mapreduce.jobhistory.webapp.address</name>
+    <value>HEAD:19888</value>
+  </property>
+  <property>
+    <name>mapreduce.fileoutputcommitter.algorithm.version</name>
+    <value>2</value>
+  </property> 
+</configuration>

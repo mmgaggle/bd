@@ -23,7 +23,7 @@
   </property>
   <property>
     <name>fs.defaultFS</name>
-    <value>hdfs://HDFS_HOST:8020/</value>
+    <value>hdfs://HEAD:8020/</value>
   </property>
   <property>
     <name>fs.s3a.impl</name>
@@ -31,7 +31,7 @@
   </property>
   <property>
     <name>fs.s3a.endpoint</name>
-    <value>s3.qct.io</value>
+    <value>ENDPOINT</value>
   </property>
   <property>
     <name>fs.s3a.access.key</name>
