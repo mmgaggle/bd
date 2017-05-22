@@ -3,21 +3,9 @@
 
 - name: apply common configuration to all nodes
   hosts: all
-  remote_user: root
+  remote_user: ec2-user
+  become: root
+  become_method: sudo
 
   roles:
     - common
-
-- name: configure and deploy head server
-  hosts: head
-  remote_user: root
-
-  roles:
-    - head
-
-- name: configure and deploy worker servers
-  hosts: worker
-  remote_user: root
-
-  roles:
-    - worker
