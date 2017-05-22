@@ -1,5 +1,7 @@
 # bd
 
-To get started with the big data stack
+Ansible Playbook to setup Big Data COE Stack.
 
-``` sudo yum install -y git && git clone https://github.com/mmgaggle/bd.git ```
+First, install the Oracle Java playbook:
+
+```sudo ansible-galaxy install ansiblebit.oracle-java```
