@@ -1,0 +1,6 @@
+# There should be a single host in this host group
+[head]
+
+# All other compute hosts should be in this host group
+[workers]
+
