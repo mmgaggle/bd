@@ -15,10 +15,15 @@
 
 - file:
     src: /hadoop/share/hadoop/tools/lib/hadoop-aws-2.7.3.jar
-    dest: /hadoop/spark/jars/
+    dest: /hadoop/spark/jars/hadoop-aws-2.7.3.jar
     state: link
 
 - file:
     src: /hadoop/share/hadoop/tools/lib/aws-java-sdk-1.7.4.jar
-    dest: /hadoop/spark/jars/
+    dest: /hadoop/spark/jars/aws-java-sdk-1.7.4.jar
+    state: link
+
+- file:
+    src: /hadoop/hive/conf/hive-site.xml
+    dest: /hadoop/spark/conf/hive-site.xml
     state: link

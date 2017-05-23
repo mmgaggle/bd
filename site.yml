@@ -3,7 +3,7 @@
 
 - name: apply common configuration to all nodes
   hosts: all
-  remote_user: ec2-user
+  remote_user: '{{ remote_user }}'
   become: yes
   become_method: sudo
 
@@ -18,7 +18,7 @@
 
 - name: install and configure head node
   hosts: head
-  remote_user: ec2-user
+  remote_user: '{{ remote_user }}'
   become: yes
   become_method: sudo
 
@@ -30,13 +30,14 @@
 
 - name: install and configure worker nodes
   hosts: workers
-  remote_user: ec2-user
+  remote_user: '{{ remote_user }}'
   become: yes
   become_method: sudo
 
   roles:
     - hadoop-common
+    - hive
     - spark
     - kafka
-    - secor
     - maven
+    - secor
