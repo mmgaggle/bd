@@ -1,43 +1,15 @@
 ---
 # This playbook contains common plays that will be run on all nodes.
 
-- file:
-    path: /hadoop
-    state: directory
-    mode: 0755
+- name: Install ntp
+  yum: name=ntp state=present
+  tags: ntp
 
-- unarchive:
-    src: http://apache.mirrors.pair.com/hadoop/common/hadoop-2.7.3/hadoop-2.7.3.tar.gz
-    dest: /hadoop
-    remote_src: True
-    extra_opts: "--strip-components=1"
+- name: Configure ntp file
+  template: src=ntp.conf.j2 dest=/etc/ntp.conf
+  tags: ntp
+  notify: restart ntp
 
-- file:
-    path: /hadoop/hive
-    state: directory
-    mode: 0755
-
-- unarchive:
-    src: http://apache.mirrors.pair.com/hive/hive-2.1.1/apache-hive-2.1.1-bin.tar.gz -o apache-hive-2.1.1-bin.tar.gz
-    dest: /hadoop/hive
-    remote_src: True
-
-- file:
-    path: /hadoop/spark
-    state: directory
-    mode: 0755
-
-- unarchive:
-    src: http://apache.mirrors.pair.com/spark/spark-2.1.1/spark-2.1.1-bin-hadoop2.7.tgz -o spark-2.1.1-bin-hadoop2.7.tgz
-    dest: /hadoop/spark
-    remote_src: True
-
-- file:
-    path: /hadoop/kafka
-    state: directory
-    mode: 0755
-
-- unarchive:
-    src: http://apache.mirrors.pair.com/kafka/0.10.2.1/kafka_2.10-0.10.2.1.tgz -o kafka_2.10-0.10.2.1.tgz
-    dest: /hadoop/kafka
-    remote_src: True
+- name: Start the ntp service
+  service: name=ntpd state=started enabled=yes
+  tags: ntp

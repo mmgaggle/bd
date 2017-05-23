@@ -1,0 +1,12 @@
+---
+# This playbook installs and configures Apache Spark
+
+- file:
+    path: /hadoop/spark
+    state: directory
+    mode: 0755
+
+- unarchive:
+    src: http://apache.mirrors.pair.com/spark/spark-2.1.1/spark-2.1.1-bin-hadoop2.7.tgz -o spark-2.1.1-bin-hadoop2.7.tgz
+    dest: /hadoop/spark
+    remote_src: True

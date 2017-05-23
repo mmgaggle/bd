@@ -1,0 +1,14 @@
+---
+# This playbook installs and configures Apache Hive
+
+- file:
+    path: /hadoop/hive
+    state: directory
+    mode: 0755
+
+- unarchive:
+    src: http://apache.mirrors.pair.com/hive/hive-2.1.1/apache-hive-2.1.1-bin.tar.gz -o apache-hive-2.1.1-bin.tar.gz
+    dest: /hadoop/hive
+    remote_src: True
+    extra_opts: "--strip-components=1"
+    creates: /hadoop/hive/LICENSE

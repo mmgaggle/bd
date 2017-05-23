@@ -1,0 +1,49 @@
+---
+# This playbook installs and configures Apache Hadoop
+
+- file:
+    path: /hadoop
+    state: directory
+    mode: 0755
+
+- file:
+    path: /hadoop/nn
+    state: directory
+    mode: 0755
+ 
+- file:
+    path: /hadoop/dn
+    state: directory
+    mode: 0755
+
+- file:
+    path: /hadoop/yarn/nm
+    state: directory
+    mode: 0755
+
+- unarchive:
+    src: http://apache.mirrors.pair.com/hadoop/common/hadoop-2.7.3/hadoop-2.7.3.tar.gz
+    dest: /hadoop
+    remote_src: True
+    extra_opts: "--strip-components=1"
+    creates: /hadoop/LICENSE.txt
+
+- name: Configure slaves file
+  template: src=slaves.j2 dest=/hadoop/etc/hadoop/slaves
+  tags: hadoop
+
+- name: Configure core site file
+  template: src=core-site.j2 dest=/hadoop/etc/hadoop/core-site.xml
+  tags: hadoop
+
+- name: Configure hdfs site file
+  template: src=hdfs-site.j2 dest=/hadoop/etc/hadoop/hdfs-site.xml
+  tags: hadoop
+
+- name: Configure yarn site file
+  template: src=yarn-site.j2 dest=/hadoop/etc/hadoop/yarn-site.xml
+  tags: hadoop
+
+- name: Configure mapred site file
+  template: src=yarn-site.j2 dest=/hadoop/etc/hadoop/yarn-site.xml
+  tags: hadoop

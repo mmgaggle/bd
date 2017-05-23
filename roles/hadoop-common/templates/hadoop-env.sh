@@ -32,7 +32,7 @@ export JAVA_HOME=${JAVA_HOME}
 
 export HADOOP_CONF_DIR=${HADOOP_CONF_DIR:-"/etc/hadoop"}
 
-for f in /root/hadoop/hadoop-2.7.3/share/hadoop/tools/lib/*.jar; do
+for f in /hadoop/share/hadoop/tools/lib/*.jar; do
   if [ "$HADOOP_CLASSPATH" ]; then
     export HADOOP_CLASSPATH=$HADOOP_CLASSPATH:$f
   else

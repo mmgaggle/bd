@@ -37,15 +37,15 @@
     </property>
     <property>
         <name>yarn.nodemanager.local-dirs</name>
-        <value>/home/hadoop/yarn/nm</value>
+        <value>/hadoop/yarn/nm</value>
     </property>
  <property>
     <name>yarn.log.server.url</name>
-    <value>http://HEAD:19888/jobhistory/logs</value>
+    <value>http://{{ groups[['head'][0]][0] }}:19888/jobhistory/logs</value>
   </property>
     <property>
     <name>yarn.timeline-service.hostname</name>
-    <value>HEAD</value>
+    <value>{{ groups[['head'][0]][0] }}</value>
   </property>
 <property>
   <description>The setting that controls whether yarn system metrics is
@@ -67,23 +67,23 @@
   </property>
     <property>
     <name>yarn.resourcemanager.address</name>
-    <value>HEAD:8032</value>
+    <value>{{ groups[['head'][0]][0] }}:8032</value>
   </property>
   <property>
     <name>yarn.resourcemanager.scheduler.address</name>
-    <value>HEAD:8030</value>
+    <value>{{ groups[['head'][0]][0] }}:8030</value>
   </property>
   <property>
     <name>yarn.resourcemanager.resource-tracker.address</name>
-    <value>HEAD:8031</value>
+    <value>{{ groups[['head'][0]][0] }}:8031</value>
   </property>
   <property>
     <name>yarn.resourcemanager.admin.address</name>
-    <value>HEAD:8033</value>
+    <value>{{ groups[['head'][0]][0] }}:8033</value>
   </property>
   <property>
     <name>yarn.resourcemanager.webapp.address</name>
-    <value>HEAD:8088</value>
+    <value>{{ groups[['head'][0]][0] }}:8088</value>
   </property> 
 <property>
       <name>yarn.log-aggregation-enable</name>

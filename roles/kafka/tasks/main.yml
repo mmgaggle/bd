@@ -1,0 +1,12 @@
+---
+# This playbook installs and configures Apache Kafka
+
+- file:
+    path: /hadoop/kafka
+    state: directory
+    mode: 0755
+
+- unarchive:
+    src: http://apache.mirrors.pair.com/kafka/0.10.2.1/kafka_2.10-0.10.2.1.tgz -o kafka_2.10-0.10.2.1.tgz
+    dest: /hadoop/kafka
+    remote_src: True

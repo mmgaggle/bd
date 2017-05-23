@@ -51,7 +51,7 @@
   </property>
   <property>
     <name>mapreduce.application.classpath</name>
-    <value>/root/hadoop/hadoop-2.7.3/share/hadoop/mapreduce/*,/root/hadoop/hadoop-2.7.3/share/hadoop/mapreduce/lib/*,/root/hadoop/hadoop-2.7.3/share/hadoop/tools/lib/*</value>
+    <value>/hadoop/share/hadoop/mapreduce/*,/hadoop/share/hadoop/mapreduce/lib/*,/hadoop/share/hadoop/tools/lib/*</value>
   </property>
   <property>
     <name>yarn.nodemanager.aux-services</name>
@@ -83,11 +83,11 @@
   </property>
   <property>
     <name>mapreduce.jobhistory.address</name>
-    <value>HEAD:10020</value>
+    <value>{{ groups[['head'][0]][0] }}:10020</value>
   </property>
   <property>
     <name>mapreduce.jobhistory.webapp.address</name>
-    <value>HEAD:19888</value>
+    <value>{{ groups[['head'][0]][0] }}:19888</value>
   </property>
   <property>
     <name>mapreduce.fileoutputcommitter.algorithm.version</name>
