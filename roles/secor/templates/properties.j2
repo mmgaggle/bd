@@ -1,0 +1,35 @@
+secor.kafka.topic_filter=logs
+kafka.seed.broker.host=localhost
+zookeeper.quorum={{ groups[['head'][0]][0] }}:2181
+
+aws.access.key={{ access_key }}
+aws.secret.key={{ secret_key }}
+aws.endpoint={{ endpoint }}
+aws.client.pathstyleaccess=true
+secor.s3.bucket={{ secor_bucket }}
+secor.s3.path=sequence
+
+secor.consumer.threads={{ secor_consumer_threads }}
+secor.local.path=/tmp/secor/sequence
+
+secor.max.file.size.bytes={{ secor_max_filesize }}
+secor.max.file.age.seconds={{ secor_max_fileage }}
+
+secor.zookeeper.path=/secor
+kafka.zookeeper.path=/
+
+secor.kafka.group=secor
+
+# Parser class that extracts partitions from consumed messages.
+secor.message.parser.class=com.pinterest.secor.parser.OffsetMessageParser
+
+cloud.service=S3
+secor.s3.filesystem=s3a
+secor.upload.manager.class=com.pinterest.secor.uploader.S3UploadManager
+secor.file.reader.writer.factory=com.pinterest.secor.io.impl.DelimitedTextFileReaderWriterFactory
+
+#Required for unknown reasons
+ostrich.port=9999
+
+#last so we can overide things frist, crazy right?
+include=secor.common.properties
