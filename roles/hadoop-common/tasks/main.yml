@@ -2,17 +2,12 @@
 # This playbook installs and configures Apache Hadoop
 
 - file:
-    path: /hadoop
-    state: directory
-    mode: 0755
-
-- file:
-    path: /hadoop/nn
+    path: /hadoop/hdfs/nn
     state: directory
     mode: 0755
  
 - file:
-    path: /hadoop/dn
+    path: /hadoop/hdfs/dn
     state: directory
     mode: 0755
 
