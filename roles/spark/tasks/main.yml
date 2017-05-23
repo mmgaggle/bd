@@ -12,3 +12,13 @@
     remote_src: True
     extra_opts: "--strip-components=1"
     creates: /hadoop/spark/LICENSE
+
+- file:
+    src: /hadoop/share/hadoop/tools/lib/hadoop-aws-2.7.3.jar
+    dest: /hadoop/spark/jars/
+    state: link
+
+- file:
+    src: /hadoop/share/hadoop/tools/lib/aws-java-sdk-1.7.4.jar
+    dest: /hadoop/spark/jars/
+    state: link
