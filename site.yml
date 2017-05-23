@@ -24,6 +24,7 @@
 
   roles:
     - hadoop-common
+    - presto-common
     - hive
     - spark
     - kafka
@@ -36,6 +37,7 @@
 
   roles:
     - hadoop-common
+    - presto-common
     - hive
     - spark
     - kafka
