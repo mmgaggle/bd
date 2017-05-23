@@ -1,0 +1,18 @@
+---
+# This playbook installs and configures Pintrest Secor
+
+- file:
+    path: /hadoop/secor
+    state: directory
+    mode: 0755
+
+- unarchive:
+    src: https://github.com/pinterest/secor/archive/v0.23.tar.gz
+    dest: /hadoop/secor
+    remote_src: True
+    extra_opts: "--strip-components=1"
+    creates: /hadoop/secor/LICENSE
+
+- name: Configure properties file
+  template: src=properties.j2 dest=/hadoop/secor
+  tags: hadoop
