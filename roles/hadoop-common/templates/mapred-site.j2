@@ -87,7 +87,7 @@
   </property>
   <property>
     <name>mapreduce.jobhistory.webapp.address</name>
-    <value>{{ hostvars['35.166.22.154']['ansible_eth0']['ipv4']['address'] }}:19888</value>
+    <value>{{ hostvars[groups[['head'][0]][0]]['ansible_eth0']['ipv4']['address'] }}:19888</value>
   </property>
   <property>
     <name>mapreduce.fileoutputcommitter.algorithm.version</name>

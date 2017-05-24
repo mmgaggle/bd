@@ -34,11 +34,19 @@
 - name: Configure hdfs site file
   template: src=hdfs-site.j2 dest=/hadoop/etc/hadoop/hdfs-site.xml
   tags: hadoop
+  notify:
+  - format namenode
+  - start namenode
+  - start datanode
 
 - name: Configure yarn site file
   template: src=yarn-site.j2 dest=/hadoop/etc/hadoop/yarn-site.xml
   tags: hadoop
+  notify:
+  - start resourcemanager
+  - start nodemanager
 
 - name: Configure mapred site file
   template: src=mapred-site.j2 dest=/hadoop/etc/hadoop/mapred-site.xml
   tags: hadoop
+  - start historyserver

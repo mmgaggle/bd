@@ -1,0 +1,32 @@
+---
+# Handlers for Name Node
+
+- name: format namenode
+  shell: creates=/hadoop/hdfs/nn/current/VERSION JAVA_HOME=/usr/java/jdk1.8.0_131 /hadoop/bin/hdfs namenode -format
+  when:
+  - head in group_names
+
+- name: start namenode
+  shell: JAVA_HOME=/usr/java/jdk1.8.0_131 /hadoop/sbin/hadoop-daemon.sh --config /hadoop/etc/hadoop start namenode
+  when:
+  - head in group_names
+
+- name: start datanode
+  shell: JAVA_HOME=/usr/java/jdk1.8.0_131 /hadoop/sbin/hadoop-daemon.sh --config /hadoop/etc/hadoop start datanode
+  when:
+  - all in group_names
+
+- name: start resourcemanager
+  shell: JAVA_HOME=/usr/java/jdk1.8.0_131 /hadoop/sbin/yarn-daemon.sh --config /hadoop/etc/hadoop start resourcemanager
+  when: 
+  - head in group_names
+
+- name: start nodemanager
+  shell: JAVA_HOME=/usr/java/jdk1.8.0_131 /hadoop/sbin/yarn-daemon.sh --config /hadoop/etc/hadoop start nodemanager
+  when:
+  - worker in group_names
+
+- name: start historyserver
+  shell: JAVA_HOME=/usr/java/jdk1.8.0_131 /hadoop/sbin/mr-jobhistory-daemon.sh --config /hadoop/etc/hadoop start historyserver
+  when:
+  - worker in group_names
