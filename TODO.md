@@ -1,12 +1,21 @@
 # Hadoop
-* hadoop handlers
-  * format namenode
-    sudo JAVA_HOME=/usr/java/jdk1.8.0_131 /hadoop/bin/hdfs namenode -format
-  * start namenode
-    sudo JAVA_HOME=/usr/java/jdk1.8.0_131 /hadoop/sbin/hadoop-daemon.sh --config /hadoop/etc/hadoop/ start namenode
-  * start datanode
-  * start resource manager
-  * start node manager
+
+## HDFS
+Format Name Node
+```sudo JAVA_HOME=/usr/java/jdk1.8.0_131 /hadoop/bin/hdfs namenode -format```
+
+Start Name Node
+```sudo JAVA_HOME=/usr/java/jdk1.8.0_131 /hadoop/sbin/hadoop-daemon.sh --config /hadoop/etc/hadoop start namenode```
+
+Start Data Node
+    sudo JAVA_HOME=/usr/java/jdk1.8.0_131 /hadoop/sbin/hadoop-daemon.sh --config /hadoop/etc/hadoop start datanode
+
+## YARN
+Start Resource Manager
+```sudo JAVA_HOME=/usr/java/jdk1.8.0_131 /hadoop/sbin/yarn-daemon.sh --config /hadoop/etc/hadoop start resourcemanager```
+
+Start Node Manager
+```sudo JAVA_HOME=/usr/java/jdk1.8.0_131 /hadoop/sbin/yarn-daemon.sh --config /hadoop/etc/hadoop start resourcemanager```
 
 # Hive
 * hive mysql install and config

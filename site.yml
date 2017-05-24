@@ -24,10 +24,10 @@
 
   roles:
     - hadoop-common
-    - presto-common
-    - hive
-    - spark
-    - kafka
+#    - presto
+#    - hive
+#    - spark
+#    - kafka
 
 - name: install and configure worker nodes
   hosts: workers
@@ -37,9 +37,9 @@
 
   roles:
     - hadoop-common
-    - presto-common
-    - hive
-    - spark
-    - kafka
-    - maven
-    - secor
+#    - presto
+#    - hive
+#    - spark
+#    - kafka
+#    - maven
+#    - secor
