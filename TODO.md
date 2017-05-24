@@ -22,6 +22,10 @@ Start Node Manager
 
 ```sudo JAVA_HOME=/usr/java/jdk1.8.0_131 /hadoop/sbin/yarn-daemon.sh --config /hadoop/etc/hadoop start resourcemanager```
 
+Start Job History Server
+
+``` /bin/false ```
+
 # Hive
 * hive mysql install and config
 * hive handlers
