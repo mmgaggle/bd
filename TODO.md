@@ -1,10 +1,27 @@
-* spark configs
+# Hadoop
+* hadoop handlers
+  * format namenode
+    sudo JAVA_HOME=/usr/java/jdk1.8.0_131 /hadoop/bin/hdfs namenode -format
+  * start namenode
+    sudo JAVA_HOME=/usr/java/jdk1.8.0_131 /hadoop/sbin/hadoop-daemon.sh --config /hadoop/etc/hadoop/ start namenode
+  * start datanode
+  * start resource manager
+  * start node manager
+
+# Hive
+* hive mysql install and config
+* hive handlers
+  * 
+
+# Presto
 * presto configs
-* kafka configs
+* presto handlers
+
+# Streaming
 * zookeeper configs
-* add collectd
+* zookeeper handlers
+* kafka configs
+* secor install and config
 
-* hadoop handlers (start this, stop that)
-* hive mysql stuff
-* hive handlers (metastore)
-
+# General
+* collectd install and config
