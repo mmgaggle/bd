@@ -12,82 +12,77 @@
   See the License for the specific language governing permissions and
   limitations under the License. See accompanying LICENSE file.
 -->
-<configuration>
 
 <!-- Site specific YARN configuration properties -->
-<property>
-  <name>yarn.resourcemanager.scheduler.class</name>
-  <value>org.apache.hadoop.yarn.server.resourcemanager.scheduler.fair.FairScheduler</value>
-</property>
-   <property>
-        <name>yarn.nodemanager.vmem-check-enabled</name>
-        <value>false</value>
-    </property>
-   <property>
-        <name>yarn.nodemanager.resource.cpu-vcores</name>
-        <value>48</value>
-    </property>
-    <property>
-        <name>yarn.nodemanager.resource.memory-mb</name>
-        <value>124000</value>
-    </property>
-    <property>
-        <name>yarn.scheduler.maximum-allocation-mb</name>
-        <value>65536</value>
-    </property>
-    <property>
-        <name>yarn.nodemanager.local-dirs</name>
-        <value>/hadoop/yarn/nm</value>
-    </property>
- <property>
-    <name>yarn.log.server.url</name>
-    <value>http://{{ groups[['head'][0]][0] }}:19888/jobhistory/logs</value>
-  </property>
-    <property>
-    <name>yarn.timeline-service.hostname</name>
-    <value>{{ groups[['head'][0]][0] }}</value>
-  </property>
-<property>
-  <description>The setting that controls whether yarn system metrics is
-  published on the timeline server or not by RM.</description>
-  <name>yarn.resourcemanager.system-metrics-publisher.enabled</name>
-  <value>true</value>
-</property>
 
-<property>
-  <description>Indicate to clients whether to query generic application
-  data from timeline history-service or not. If not enabled then application
-  data is queried only from Resource Manager.</description>
-  <name>yarn.timeline-service.generic-application-history.enabled</name>
-  <value>true</value>
+<configuration>
+  <property>
+    <name>yarn.resourcemanager.scheduler.class</name>
+    <value>org.apache.hadoop.yarn.server.resourcemanager.scheduler.fair.FairScheduler</value>
   </property>
-    <property>
+  <property>
+    <name>yarn.nodemanager.vmem-check-enabled</name>
+    <value>false</value>
+  </property>
+  <property>
+    <name>yarn.nodemanager.resource.cpu-vcores</name>
+    <value>48</value>
+  </property>
+  <property>
+    <name>yarn.nodemanager.resource.memory-mb</name>
+    <value>124000</value>
+  </property>
+  <property>
+    <name>yarn.scheduler.maximum-allocation-mb</name>
+    <value>65536</value>
+  </property>
+  <property>
+    <name>yarn.nodemanager.local-dirs</name>
+    <value>/hadoop/yarn/nm</value>
+  </property>
+  <property>
+    <name>yarn.log.server.url</name>
+    <value>http://{{ hostvars[groups[['head'][0]][0]]['ansible_eth0']['ipv4']['address'] }}:19888/jobhistory/logs</value>
+  </property>
+  <property>
+    <name>yarn.timeline-service.hostname</name>
+    <value>{{ hostvars[groups[['head'][0]][0]]['ansible_eth0']['ipv4']['address'] }}</value>
+  </property>
+  <property>
+    <name>yarn.resourcemanager.system-metrics-publisher.enabled</name>
+    <value>true</value>
+  </property>
+  <property>
+    <name>yarn.timeline-service.generic-application-history.enabled</name>
+    <value>true</value>
+  </property>
+  <property>
     <name>yarn.timeline-service.enabled</name>
     <value>true</value>
   </property>
-    <property>
+  <property>
     <name>yarn.resourcemanager.address</name>
-    <value>{{ groups[['head'][0]][0] }}:8032</value>
+    <value>{{ hostvars[groups[['head'][0]][0]]['ansible_eth0']['ipv4']['address'] }}:8032</value>
   </property>
   <property>
     <name>yarn.resourcemanager.scheduler.address</name>
-    <value>{{ groups[['head'][0]][0] }}:8030</value>
+    <value>{{ hostvars[groups[['head'][0]][0]]['ansible_eth0']['ipv4']['address'] }}:8030</value>
   </property>
   <property>
     <name>yarn.resourcemanager.resource-tracker.address</name>
-    <value>{{ groups[['head'][0]][0] }}:8031</value>
+    <value>{{ hostvars[groups[['head'][0]][0]]['ansible_eth0']['ipv4']['address'] }}:8031</value>
   </property>
   <property>
     <name>yarn.resourcemanager.admin.address</name>
-    <value>{{ groups[['head'][0]][0] }}:8033</value>
+    <value>{{ hostvars[groups[['head'][0]][0]]['ansible_eth0']['ipv4']['address'] }}:8033</value>
   </property>
   <property>
     <name>yarn.resourcemanager.webapp.address</name>
-    <value>{{ groups[['head'][0]][0] }}:8088</value>
+    <value>{{ hostvars[groups[['head'][0]][0]]['ansible_eth0']['ipv4']['address'] }}:8088</value>
   </property> 
-<property>
-      <name>yarn.log-aggregation-enable</name>
-      <value>true</value>
+  <property>
+    <name>yarn.log-aggregation-enable</name>
+    <value>true</value>
   </property>
   <property>
      <name>yarn.nodemanager.remote-app-log-dir</name>

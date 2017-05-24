@@ -5,6 +5,8 @@ Format Name Node
 
 ```sudo JAVA_HOME=/usr/java/jdk1.8.0_131 /hadoop/bin/hdfs namenode -format```
 
+creates: /hadoop/hdfs/nn/current/VERSION
+
 Start Name Node
 
 ```sudo JAVA_HOME=/usr/java/jdk1.8.0_131 /hadoop/sbin/hadoop-daemon.sh --config /hadoop/etc/hadoop start namenode```
@@ -20,7 +22,7 @@ Start Resource Manager
 
 Start Node Manager
 
-```sudo JAVA_HOME=/usr/java/jdk1.8.0_131 /hadoop/sbin/yarn-daemon.sh --config /hadoop/etc/hadoop start resourcemanager```
+```sudo JAVA_HOME=/usr/java/jdk1.8.0_131 /hadoop/sbin/yarn-daemon.sh --config /hadoop/etc/hadoop start nodemanager```
 
 ## Map Reduce
 
