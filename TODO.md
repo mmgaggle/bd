@@ -22,9 +22,11 @@ Start Node Manager
 
 ```sudo JAVA_HOME=/usr/java/jdk1.8.0_131 /hadoop/sbin/yarn-daemon.sh --config /hadoop/etc/hadoop start resourcemanager```
 
+## Map Reduce
+
 Start Job History Server
 
-``` /bin/false ```
+```sudo JAVA_HOME=/usr/java/jdk1.8.0_131 sbin/mr-jobhistory-daemon.sh --config /hadoop/etc/hadoop start historyserver  ```
 
 # Hive
 * hive mysql install and config
