@@ -1,4 +1,4 @@
 ---
 all: all
 head: head
-worker: worker
+workers: workers

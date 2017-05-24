@@ -11,8 +11,18 @@
   when:
   - head in group_names
 
+- name: stop namenode
+  shell: JAVA_HOME=/usr/java/jdk1.8.0_131 /hadoop/sbin/hadoop-daemon.sh --config /hadoop/etc/hadoop stop namenode
+  when:
+  - head in group_names
+
 - name: start datanode
   shell: JAVA_HOME=/usr/java/jdk1.8.0_131 /hadoop/sbin/hadoop-daemon.sh --config /hadoop/etc/hadoop start datanode
+  when:
+  - all in group_names
+
+- name: stop datanode
+  shell: JAVA_HOME=/usr/java/jdk1.8.0_131 /hadoop/sbin/hadoop-daemon.sh --config /hadoop/etc/hadoop stop datanode
   when:
   - all in group_names
 
@@ -21,12 +31,28 @@
   when: 
   - head in group_names
 
-- name: start nodemanager
-  shell: JAVA_HOME=/usr/java/jdk1.8.0_131 /hadoop/sbin/yarn-daemon.sh --config /hadoop/etc/hadoop start nodemanager
-  when:
-  - worker in group_names
+- name: stop resourcemanager
+  shell: JAVA_HOME=/usr/java/jdk1.8.0_131 /hadoop/sbin/yarn-daemon.sh --config /hadoop/etc/hadoop stop resourcemanager
+  when: 
+  - head in group_names
 
 - name: start historyserver
   shell: JAVA_HOME=/usr/java/jdk1.8.0_131 /hadoop/sbin/mr-jobhistory-daemon.sh --config /hadoop/etc/hadoop start historyserver
   when:
-  - worker in group_names
+  - head in group_names
+
+- name: stop historyserver
+  shell: JAVA_HOME=/usr/java/jdk1.8.0_131 /hadoop/sbin/mr-jobhistory-daemon.sh --config /hadoop/etc/hadoop stop historyserver
+  when:
+  - head in group_names
+
+- name: start nodemanager
+  shell: JAVA_HOME=/usr/java/jdk1.8.0_131 /hadoop/sbin/yarn-daemon.sh --config /hadoop/etc/hadoop start nodemanager
+  when:
+  - workers in group_names
+
+- name: stop nodemanager
+  shell: JAVA_HOME=/usr/java/jdk1.8.0_131 /hadoop/sbin/yarn-daemon.sh --config /hadoop/etc/hadoop stop nodemanager
+  when:
+  - workers in group_names
+
