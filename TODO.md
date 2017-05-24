@@ -28,7 +28,7 @@ Start Node Manager
 
 Start Job History Server
 
-```sudo JAVA_HOME=/usr/java/jdk1.8.0_131 sbin/mr-jobhistory-daemon.sh --config /hadoop/etc/hadoop start historyserver  ```
+```sudo JAVA_HOME=/usr/java/jdk1.8.0_131 /hadoop/sbin/mr-jobhistory-daemon.sh --config /hadoop/etc/hadoop start historyserver  ```
 
 # Hive
 * hive mysql install and config
