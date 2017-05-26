@@ -29,9 +29,16 @@ s3a_fast_upload: 'true'             # default false
 s3a_fast_buffer_size: 1048576       # default 1048576 1 MiB
 
 # Hive
-hive_metastore_warehouse_dir: s3a://hive/warehouse
-hive_scratchdir: s3a://tmp/hive
+mysql_port: 3306
+hive_metastore_database_name: metastore
+hive_metastore_mysql_user: hive
 hive_metastore_mysql_password: password
+
+hive_metastore_warehouse_dir: s3a://hive/warehouse
+hive_scratchdir: s3a://hive/tmp
+
+# Presto
+presto_staging_dir: /tmp/presto
 
 # Secor
 secor_bucket: 'stream'

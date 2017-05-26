@@ -7,7 +7,7 @@
     mode: 0755
 
 - unarchive:
-    src: http://apache.mirrors.pair.com/hive/hive-2.1.1/apache-hive-2.1.1-bin.tar.gz -o apache-hive-2.1.1-bin.tar.gz
+    src: http://apache.mirrors.pair.com/hive/hive-2.1.1/apache-hive-2.1.1-bin.tar.gz
     dest: /hadoop/hive
     remote_src: True
     extra_opts: "--strip-components=1"
@@ -16,3 +16,52 @@
 - name: Configure hive-site file
   template: src=hive-site.j2 dest=/hadoop/hive/conf/hive-site.xml
   tags: hive
+  notify:
+  #- stop metastore
+  - start metastore
+
+- file:
+    src: /hadoop/share/hadoop/tools/lib/hadoop-aws-2.7.3.jar
+    dest: /hadoop/hive/lib/hadoop-aws-2.7.3.jar
+    state: link
+
+- file:
+    src: /hadoop/share/hadoop/tools/lib/aws-java-sdk-1.7.4.jar
+    dest: /hadoop/hive/lib/aws-java-sdk-1.7.4.jar
+    state: link
+
+- name: Install mariadb packages
+  yum: name={{ item }} state=installed
+  with_items:
+  - mariadb-server
+  - mysql-connector-java
+  - MySQL-python
+
+- file:
+    src: /usr/share/java/mysql-connector-java.jar
+    dest: /hadoop/hive/lib/mysql-connector-java.jar
+    state: link
+
+- name: Configure mariadb
+  template: src=my.cnf.j2 dest=/etc/my.cnf
+  notify:
+  - restart mariadb
+
+- name: Create mariadb files and directories
+  file: path="{{ item.path }}" mode=0755 owner=mysql group=mysql state="{{ item.state }}"
+  with_items:
+  - { path: /var/run/mysqld, state: directory }
+  - { path: /var/log/mysqld.log, state: touch }
+  - { path: /var/run/mysqld/mysqld.pid, state: touch }
+
+- name: Start mariadb service
+  service: name=mariadb state=started enabled=yes
+
+- name: Create hive database
+  mysql_db: name={{ hive_metastore_database_name }} state=present
+
+- name: Create hive mysql user and grants
+  mysql_user: name={{ hive_metastore_mysql_user }} password={{ hive_metastore_mysql_password }} priv=*.*:ALL host="{{ ansible_nodename }}" state=present
+  notify:
+  - init metastore
+  - start metastore

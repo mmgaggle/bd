@@ -18,7 +18,7 @@
 <configuration>
   <property>
     <name>javax.jdo.option.ConnectionURL</name>
-    <value>jdbc:mysql://{{ groups[['head'][0]][0] }}/metastore?createDatabaseIfNotExist=true</value>
+    <value>jdbc:mysql://{{ hostvars[groups[['head'][0]][0]]['ansible_eth0']['ipv4']['address'] }}:{{ mysql_port }}/{{ hive_metastore_database_name }}</value>
   </property>
   <property>
     <name>javax.jdo.option.ConnectionDriverName</name>
@@ -26,7 +26,11 @@
   </property>
   <property>
     <name>javax.jdo.option.ConnectionUserName</name>
-    <value>hive</value>
+    <value>{{ hive_metastore_mysql_user }}</value>
+  </property>
+  <property>
+    <name>javax.jdo.option.ConnectionPassword</name>
+    <value>{{ hive_metastore_mysql_password }}</value>
   </property>
   <property>
     <name>hive.vectorized.execution.enabled</name>
@@ -35,10 +39,6 @@
   <property>
     <name>hive.vectorized.execution.reduce.enabled</name>
     <value>true</value>
-  </property>
-  <property>
-    <name>javax.jdo.option.ConnectionPassword</name>
-    <value>{{ hive_metastore_mysql_password }}</value>
   </property>
   <property>
     <name>hive.metastore.warehouse.dir</name>
