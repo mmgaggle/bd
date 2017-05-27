@@ -2,6 +2,8 @@
 
 * Hadoop metrics via Ganglia
 
+https://www.cloudera.com/documentation/enterprise/5-9-x/topics/cm_mc_metrics_ganglia.html
+
 # Hive
 
 * Hive tuning  - see Hortonworks / Cloudera guides
