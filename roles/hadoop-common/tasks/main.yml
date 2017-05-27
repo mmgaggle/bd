@@ -1,20 +1,12 @@
 ---
 # This playbook installs and configures Apache Hadoop
 
-- file:
-    path: /hadoop/hdfs/nn
-    state: directory
-    mode: 0755
- 
-- file:
-    path: /hadoop/hdfs/dn
-    state: directory
-    mode: 0755
-
-- file:
-    path: /hadoop/yarn/nm
-    state: directory
-    mode: 0755
+- name: Create hadoop directories
+  file: path={{ item }} state=directory mode=0755
+  with_items:
+  - /hadoop/hdfs/nn
+  - /hadoop/hdfs/dn
+  - /hadoop/yarn/nm
 
 - unarchive:
     src: http://apache.mirrors.pair.com/hadoop/common/hadoop-2.7.3/hadoop-2.7.3.tar.gz
@@ -22,6 +14,10 @@
     remote_src: True
     extra_opts: "--strip-components=1"
     creates: /hadoop/LICENSE.txt
+
+- name: Calculate memory settings
+  shell: /usr/bin/egrep DirectMap /proc/meminfo|awk '{total+=$2}END{print total/1024}'
+  register: memtotal
 
 - name: Configure slaves file
   template: src=slaves.j2 dest=/hadoop/etc/hadoop/slaves
@@ -36,18 +32,23 @@
   tags: hadoop
   notify:
   - format namenode
+  - stop namenode
   - start namenode
+  - stop datanode
   - start datanode
 
 - name: Configure yarn site file
   template: src=yarn-site.j2 dest=/hadoop/etc/hadoop/yarn-site.xml
   tags: hadoop
   notify:
+  - stop resourcemanager
   - start resourcemanager
+  - stop nodemanager
   - start nodemanager
 
 - name: Configure mapred site file
   template: src=mapred-site.j2 dest=/hadoop/etc/hadoop/mapred-site.xml
   tags: hadoop
   notify:
+  - stop historyserver
   - start historyserver

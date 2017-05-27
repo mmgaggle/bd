@@ -26,15 +26,23 @@
   </property>
   <property>
     <name>yarn.nodemanager.resource.cpu-vcores</name>
-    <value>48</value>
+    <value>{{ ansible_processor_vcpus }}</value>
   </property>
   <property>
     <name>yarn.nodemanager.resource.memory-mb</name>
-    <value>124000</value>
+{% if ( memtotal.stdout|int * 0.25 ) > 8192 %}
+    <value>{{ memtotal.stdout|int - 8192 }}</value>
+{% else %}
+    <value>{{ ( memtotal.stdout|int * 0.75 )|int }}</value>
+{% endif %}
   </property>
   <property>
     <name>yarn.scheduler.maximum-allocation-mb</name>
-    <value>65536</value>
+{% if ( memtotal.stdout|int * 0.25 ) > 8192 %}
+    <value>{{ memtotal.stdout|int - 8192 }}</value>
+{% else %}
+    <value>{{ ( memtotal.stdout|int * 0.75 )|int }}</value>
+{% endif %}
   </property>
   <property>
     <name>yarn.nodemanager.local-dirs</name>

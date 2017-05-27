@@ -59,19 +59,35 @@
   </property>
   <property>
     <name>mapreduce.map.memory.mb</name>
-    <value>3500</value>
+{% if ( memtotal.stdout|int * 0.25 ) > 8192 %}
+    <value>{{ ((memtotal.stdout|int - 8192) / ansible_processor_vcpus)|int }}</value>
+{% else %}
+    <value>{{ (( memtotal.stdout|int * 0.75 )|int / ansible_processor_vcpus)|int }}</value>
+{% endif %}
   </property>
   <property>
     <name>mapreduce.map.java.opts</name>
-    <value>-Xmx3000M</value>
+{% if ( memtotal.stdout|int * 0.25 ) > 8192 %}
+    <value>-Xmx{{ ((memtotal.stdout|int - 8192) / ansible_processor_vcpus * 0.8)|round(0, 'ceil')|int }}M</value>
+{% else %}
+    <value>-Xmx{{ (( memtotal.stdout|int * 0.75 )|int / ansible_processor_vcpus * 0.8)|round(0, 'ceil')|int }}M</value>
+{% endif %}
   </property>
   <property>
     <name>mapreduce.reduce.memory.mb</name>
-    <value>9000</value>
+{% if ( memtotal.stdout|int * 0.25 ) > 8192 %}
+    <value>{{ ((memtotal.stdout|int - 8192) / ansible_processor_vcpus * 2)|int }}</value>
+{% else %}
+    <value>{{ (( memtotal.stdout|int * 0.75 )|int / ansible_processor_vcpus * 2)|int }}</value>
+{% endif %}
   </property>
   <property>
     <name>mapreduce.reduce.java.opts</name>
-    <value>-Xmx8000M</value>
+{% if ( memtotal.stdout|int * 0.25 ) > 8192 %}
+    <value>-Xmx{{ ((memtotal.stdout|int - 8192) / ansible_processor_vcpus * 2 * 0.8)|round(0, 'ceil')|int }}M</value>
+{% else %}
+    <value>-Xmx{{ (( memtotal.stdout|int * 0.75 )|int / ansible_processor_vcpus * 2 * 0.8)|round(0, 'ceil')|int }}M</value>
+{% endif %}
   </property>
   <property>
     <name>mapreduce.task.io.sort.factor</name>
