@@ -13,12 +13,18 @@ already have Ansible installed.
 
 ```sudo ansible-galaxy install ansiblebit.oracle-java```
 
-# AWS Infrasetup (optional)
-
-sudo pip install --upgrade awscli
-sudo pip install --upgrade boto
-
-ansible-playbook -i hosts setup_aws_infra.yml
+# AWS Infra setup (optional)
+- Install required packages
+   - ``sudo pip install --upgrade awscli``
+   - ``sudo pip install --upgrade boto``
+- Add your **AWS Access Key** and **Secret key** in ``group_vars/aws_creds.yml``
+- Edit AWS configuration parameters in ``group_vars/aws_vars.yml``. Some important variable to edit are :
+   - ``my_ip`` : Add public ip address of your workstation
+   - ``ec2_keypair`` : Add your EC2 keypair name
+   - ``ec2_instance_details`` : If you want to provision multiple EC2 instances. Add as many lines (representing each instance). Don't forget to set correct TAGs. TAG ``group`` is the same as ansible inventory host group.
+ 
+- Once you have updated required variables. Run ansible playbook to provision AWS resources
+   - ``ansible-playbook -i hosts setup_aws_infra.yml``
 
 ```
  _________________________________
@@ -46,11 +52,9 @@ changed: [localhost] => (item={u'type': u'worker_node', u'group': u'workers', u'
 localhost                  : ok=10   changed=1    unreachable=0    failed=0
 
 ```
-
-./ec2.py --list
-
-Look for tag_Group_head and tag_Group_workers host groups
-
+- Once AWS resources are provisioned, list EC2 instances using dynamic inventory file
+   - ``./ec2.py --list``
+- Look for **tag_Group_head** and **tag_Group_workers** host groups
 ```
  "tag_Group_head": [
     "52.91.133.226"
@@ -61,8 +65,7 @@ Look for tag_Group_head and tag_Group_workers host groups
     "54.236.48.223"
   ],
 ```
-
-Finally add these host entries in ansible inventory file i.e. ``hosts`` file. Your hosts file should look like this
+- Finally add these host entries in ansible inventory file i.e. ``hosts`` file. After addition your ``hosts file should look like this
 
 ```
 [local]
@@ -78,35 +81,7 @@ localhost ansible_connection=local ansible_python_interpreter=/usr/local/bin/pyt
 54.236.45.167
 54.236.48.223
 ```
-
-# Deploying Hadoop Stack
-
-``ansible-playbook -i hosts site.yml``
-
-```
- ____________
-< PLAY RECAP >
- ------------
-        \   ^__^
-         \  (oo)\_______
-            (__)\       )\/\
-                ||----w |
-                ||     ||
-
-52.91.133.226              : ok=31   changed=23   unreachable=0    failed=0
-54.236.45.167              : ok=26   changed=18   unreachable=0    failed=0
-54.236.48.223              : ok=26   changed=18   unreachable=0    failed=0
-54.87.235.203              : ok=26   changed=18   unreachable=0    failed=0
-localhost                  : ok=0    changed=0    unreachable=0    failed=1
-
-
-real	4m47.226s
-user	0m32.812s
-sys	0m13.832s
-```
-
-
-# Groups
+# Ansible Groups for Hadoop Stack
 
 There are two main host groups that need to be defined in your ansible hosts
 file:
@@ -131,3 +106,32 @@ The "worker" hosts do the heavy lifting.
 * kafka broker
 * kafka consumer (secor)
 * presto worker
+
+# Hadoop Setup
+- Add your **AWS Access Key** and **Secret key** in ``group_vars/all``
+
+# Deploying Hadoop Stack
+- To deploy Hadoop Stack , execute
+  - ``ansible-playbook -i hosts site.yml``
+
+```
+ ____________
+< PLAY RECAP >
+ ------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+52.91.133.226              : ok=31   changed=23   unreachable=0    failed=0
+54.236.45.167              : ok=26   changed=18   unreachable=0    failed=0
+54.236.48.223              : ok=26   changed=18   unreachable=0    failed=0
+54.87.235.203              : ok=26   changed=18   unreachable=0    failed=0
+localhost                  : ok=0    changed=0    unreachable=0    failed=1
+
+
+real	4m47.226s
+user	0m32.812s
+sys	0m13.832s
+```
