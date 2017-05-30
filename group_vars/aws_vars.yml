@@ -8,14 +8,14 @@ vpc_name: "Big_Data_VPC"
 vpc_cidr_block: "10.0.0.0/16"
 
 # Security Rules 
-my_ip: "91.156.30.194"
+my_ip: "ADD_YOUR_IP_HERE"
 security_group_name: "Big_Data_SG"
 
 # Subnets
 public_subnet_1_cidr: "10.0.1.0/24"
 
 # AWS Instance Settings
-ec2_keypair: "ksingh"
+ec2_keypair: "ADD_YOUR_EC2_KEYPAIR_NAME"
 ec2_security_group: "{{ security_group_name }}"
 ec2_instance_type: "t2.medium"
 ec2_image: "ami-2051294a"
