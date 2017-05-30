@@ -1,2 +1,2 @@
-#group_vars/aws_creds.yml
+group_vars/aws_creds.yml
 group_vars/all
