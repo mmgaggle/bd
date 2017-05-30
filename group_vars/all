@@ -7,8 +7,8 @@ remote_user: 'ec2-user'
 ntpserver: time.nasa.gov
 
 # S3 setup
-access_key: YOUR_ACCESS_KEY
-secret_key: YOUR_SECRET_KEY
+access_key: YOURACESSKEY
+secret_key: YOURSECRETKEY 
 endpoint: s3.example.com
 ssl_endpoint: false
 
