@@ -2,7 +2,7 @@
 # This playbook deploys the whole application stack in this site.
 
 - name: apply common configuration to all nodes
-  hosts: all
+  hosts: all:!localhost
   remote_user: '{{ remote_user }}'
   become: yes
   become_method: sudo

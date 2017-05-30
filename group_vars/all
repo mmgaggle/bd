@@ -7,8 +7,8 @@ remote_user: 'ec2-user'
 ntpserver: time.nasa.gov
 
 # S3 setup
-access_key: YOURACESSKEY
-secret_key: YOURSECRETKEY 
+access_key: "{{ lookup('env','AWS_ACCESS_KEY') }}"
+secret_key: "{{ lookup('env','AWS_SECRET_KEY') }}"
 endpoint: s3.example.com
 ssl_endpoint: false
 
