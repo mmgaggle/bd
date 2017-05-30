@@ -65,7 +65,7 @@ localhost                  : ok=10   changed=1    unreachable=0    failed=0
     "54.236.48.223"
   ],
 ```
-- Finally add these host entries in ansible inventory file i.e. ``hosts`` file. After addition your ``hosts file should look like this
+- Finally add these host entries (manually) in ansible inventory file i.e. ``hosts`` file. After addition your ``hosts file should look like this
 
 ```
 [local]
