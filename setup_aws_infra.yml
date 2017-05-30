@@ -1,0 +1,10 @@
+---
+- hosts: local
+  connection: local
+  gather_facts: false
+  vars_files:
+    - group_vars/aws_vars.yml
+    - group_vars/aws_creds.yml
+  roles:
+    - vpc
+    - ec2

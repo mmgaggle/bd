@@ -83,6 +83,27 @@ localhost ansible_connection=local ansible_python_interpreter=/usr/local/bin/pyt
 
 ``ansible-playbook -i hosts site.yml``
 
+```
+ ____________
+< PLAY RECAP >
+ ------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+52.91.133.226              : ok=31   changed=23   unreachable=0    failed=0
+54.236.45.167              : ok=26   changed=18   unreachable=0    failed=0
+54.236.48.223              : ok=26   changed=18   unreachable=0    failed=0
+54.87.235.203              : ok=26   changed=18   unreachable=0    failed=0
+localhost                  : ok=0    changed=0    unreachable=0    failed=1
+
+
+real	4m47.226s
+user	0m32.812s
+sys	0m13.832s
+```
 
 
 # Groups

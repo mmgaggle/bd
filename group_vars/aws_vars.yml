@@ -1,0 +1,33 @@
+---
+# AWS Region Information
+aws_region: "us-east-1"
+aws_az: "us-east-1e"
+
+# VPC Information
+vpc_name: "Big_Data_VPC"
+vpc_cidr_block: "10.0.0.0/16"
+
+# Security Rules 
+my_ip: "91.156.30.194"
+security_group_name: "Big_Data_SG"
+
+# Subnets
+public_subnet_1_cidr: "10.0.1.0/24"
+
+# AWS Instance Settings
+ec2_keypair: "ksingh"
+ec2_security_group: "{{ security_group_name }}"
+ec2_instance_type: "t2.medium"
+ec2_image: "ami-2051294a"
+ec2_region: "{{ aws_region }}"
+ec2_az: "{{ aws_az }}"
+ec2_device_name: "/dev/xvda"
+ec2_volume_type: "gp2"
+ec2_root_volume_size: 16
+ec2_volume_delete_on_termination: "true"
+ec2_instance_details:
+    - { name: 'head1', type: 'head_node', group: 'head' }
+    - { name: 'worker1', type: 'worker_node', group: 'workers' }
+    - { name: 'worker2', type: 'worker_node', group: 'workers' }
+    - { name: 'worker3', type: 'worker_node', group: 'workers' }
+
