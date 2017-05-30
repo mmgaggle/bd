@@ -17,12 +17,15 @@ already have Ansible installed.
 - Install required packages
    - ``sudo pip install --upgrade awscli``
    - ``sudo pip install --upgrade boto``
-- Add your **AWS Access Key** and **Secret key** in ``group_vars/aws_creds.yml``
 - Edit AWS configuration parameters in ``group_vars/aws_vars.yml``. Some important variable to edit are :
    - ``my_ip`` : Add public ip address of your workstation
    - ``ec2_keypair`` : Add your EC2 keypair name
    - ``ec2_instance_details`` : If you want to provision multiple EC2 instances. Add as many lines (representing each instance). Don't forget to set correct TAGs. TAG ``group`` is the same as ansible inventory host group.
- 
+- Export your **AWS_ACCESS_KEY** and **AWS_SECRET_KEY** as environment variables
+```
+export AWS_ACCESS_KEY='Your_AWS_Access_Key_Here'
+export AWS_SECRET_KEY='Your_AWS_Secret_Key_Here'
+```
 - Once you have updated required variables. Run ansible playbook to provision AWS resources
    - ``ansible-playbook -i hosts setup_aws_infra.yml``
 
