@@ -17,7 +17,6 @@
   template: src=hive-site.j2 dest=/hadoop/hive/conf/hive-site.xml
   tags: hive
   notify:
-  #- stop metastore
   - start metastore
 
 - file:
@@ -53,6 +52,9 @@
   - { path: /var/run/mysqld, state: directory }
   - { path: /var/log/mysqld.log, state: touch }
   - { path: /var/run/mysqld/mysqld.pid, state: touch }
+
+- name: Disable selinux
+  selinux: state=disabled
 
 - name: Start mariadb service
   service: name=mariadb state=started enabled=yes
