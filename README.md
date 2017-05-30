@@ -111,7 +111,11 @@ The "worker" hosts do the heavy lifting.
 * presto worker
 
 # Hadoop Setup
-- Add your **AWS Access Key** and **Secret key** in ``group_vars/all``
+- Export your **AWS_ACCESS_KEY** and **AWS_SECRET_KEY** as environment variables
+```
+export AWS_ACCESS_KEY='Your_AWS_Access_Key_Here'
+export AWS_SECRET_KEY='Your_AWS_Secret_Key_Here'
+```
 
 # Deploying Hadoop Stack
 - To deploy Hadoop Stack , execute
@@ -131,8 +135,6 @@ The "worker" hosts do the heavy lifting.
 54.236.45.167              : ok=26   changed=18   unreachable=0    failed=0
 54.236.48.223              : ok=26   changed=18   unreachable=0    failed=0
 54.87.235.203              : ok=26   changed=18   unreachable=0    failed=0
-localhost                  : ok=0    changed=0    unreachable=0    failed=1
-
 
 real	4m47.226s
 user	0m32.812s
