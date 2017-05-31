@@ -1,0 +1,9 @@
+---
+- hosts: local
+  connection: local
+  gather_facts: false
+  vars_files:
+    - group_vars/aws_vars.yml
+  roles:
+    - { role: vpc, tags: [ 'vpc' ] }
+    - { role: ec2, tags: [ 'ec2' ] }

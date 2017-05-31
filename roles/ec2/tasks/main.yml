@@ -1,0 +1,45 @@
+---
+- name: Provision instance
+  ec2:
+    key_name: "{{ ec2_keypair }}"
+    instance_type: "{{ ec2_instance_type }}" 
+    image: "{{ ec2_image }}"
+    region: "{{ ec2_region }}" 
+    zone: "{{ ec2_az }}" 
+    group_id: "{{ sg_id }}"
+    vpc_subnet_id: "{{ public_subnet_id }}"
+    wait: true
+    count: 1
+    assign_public_ip: yes
+#    volumes:
+#      - device_name: "{{ ec2_device_name }}" 
+#        volume_type: "{{ ec2_volume_type }}" 
+#        volume_size: "{{ ec2_root_volume_size }}"
+#        delete_on_termination: "{{ ec2_volume_delete_on_termination }}" 
+    instance_tags:
+      Name: "{{ item.name }}"
+      Type: "{{ item.type }}"
+      Group: "{{ item.group }}"
+  register: ec2
+  with_items: "{{ ec2_instance_details }}" 
+
+# Need to Fix this error
+# {"failed": true, "msg": "'dict object' has no attribute 'instances'"}
+
+#- debug:
+#    msg: "{{ ec2.instances }}"
+
+#- name: Add new instance to host group
+#  add_host:
+#      hostname: "{{ item.public_ip }}"
+#      groupname: launched
+#  with_items: "{{ ec2.instances }}"
+
+#- name: Wait for SSH to come up
+#  wait_for:
+#     host: "{{ item.public_dns_name }}"
+#     port: 22
+#     delay: 60
+#     timeout: 320
+#     state: started
+#  with_items: "{{ ec2.instances }}"
