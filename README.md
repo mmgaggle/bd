@@ -23,7 +23,7 @@ necessary for this approach, we recommend they be installed with pip:
 
 In order to be able to access the data lab you will need to provide some
 information in the form of variables. These variables are defined by editing
-the ``group_vars/aws_vars.yml`` file, notably:
+the ``vars/ec2.yml`` file, notably:
 
    - ``my_ip`` : Add public ip address of your workstation
    - ``ec2_keypair`` : Add your EC2 keypair name
