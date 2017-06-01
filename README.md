@@ -45,10 +45,12 @@ After the data lab is booted, verify ansible can reach all hosts:
 
 ```ansible -i ec2.py -u ec2-user -m ping all```
 
-This playbook is constructed to 
+Once you have verified that all hosts are reachable, you can execute the site
+play:
 
+```ansible-playbook -i ec2.py site.yml```
 
-# Ansible Groups for Hadoop Stack
+# Provision Data Lab on Bare Metal
 
 There are two main host groups that need to be defined in your ansible hosts
 file:
