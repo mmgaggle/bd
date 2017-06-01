@@ -1,16 +1,16 @@
 ---
 # Variables listed here are applicable to all host groups
 
-# Remote user
-remote_user: 'ec2-user'
-
-ntpserver: time.nasa.gov
+# Can be 'bare' for bare metal, or 'ec2'
+deploy_method: 'ec2'
 
 # S3 setup
 access_key: "{{ lookup('env','AWS_ACCESS_KEY') }}"
 secret_key: "{{ lookup('env','AWS_SECRET_KEY') }}"
-endpoint: s3.example.com
+endpoint: s3.amazonaws.com
 ssl_endpoint: false
+
+ntpserver: time.nasa.gov
 
 # S3A Performance Tuning
 s3a_connection_max: 15              # default 15

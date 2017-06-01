@@ -99,11 +99,11 @@
   </property>
   <property>
     <name>mapreduce.jobhistory.address</name>
-    <value>{{ hostvars[groups[['head'][0]][0]]['ansible_eth0']['ipv4']['address'] }}:10020</value>
+    <value>{{ hostvars[groups[[head_group][0]][0]]['ansible_eth0']['ipv4']['address'] }}:10020</value>
   </property>
   <property>
     <name>mapreduce.jobhistory.webapp.address</name>
-    <value>{{ hostvars[groups[['head'][0]][0]]['ansible_eth0']['ipv4']['address'] }}:19888</value>
+    <value>{{ hostvars[groups[[head_group][0]][0]]['ansible_eth0']['ipv4']['address'] }}:19888</value>
   </property>
   <property>
     <name>mapreduce.fileoutputcommitter.algorithm.version</name>

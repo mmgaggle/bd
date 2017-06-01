@@ -1,23 +1,28 @@
 ---
+# Default user for rhel ami
+remote_user: 'ec2-user'
+
+head_group: 'tag_Group_head'
+worker_group: 'tag_Group_worker'
+
 # AWS Region Information
 aws_region: "us-east-1"
 aws_az: "us-east-1e"
 
 # VPC Information
-vpc_name: "Big_Data_VPC"
+vpc_name: "big_data"
 vpc_cidr_block: "10.0.0.0/16"
 
 # Security Rules 
 my_ip: "91.156.30.194"
-security_group_name: "Big_Data_SG"
+security_group_name: "big_data"
 
 # Subnets
 public_subnet_1_cidr: "10.0.1.0/24"
 
 # AWS Instance Settings
-ec2_keypair: "ksingh"
 ec2_security_group: "{{ security_group_name }}"
-ec2_instance_type: "t2.small"
+ec2_instance_type: "t2.large"
 ec2_image: "ami-2051294a"
 ec2_region: "{{ aws_region }}"
 ec2_az: "{{ aws_az }}"
@@ -26,8 +31,8 @@ ec2_volume_type: "gp2"
 ec2_root_volume_size: 16
 ec2_volume_delete_on_termination: "true"
 ec2_instance_details:
-    - { name: 'head1', type: 'head_node', group: 'head' }
-    - { name: 'worker1', type: 'worker_node', group: 'workers' }
-    - { name: 'worker2', type: 'worker_node', group: 'workers' }
-    - { name: 'worker3', type: 'worker_node', group: 'workers' }
+    - { name: 'head1', type: 'head', group: 'head' }
+    - { name: 'worker1', type: 'worker', group: 'worker' }
+    - { name: 'worker2', type: 'worker', group: 'worker' }
+    - { name: 'worker3', type: 'worker', group: 'worker' }
 

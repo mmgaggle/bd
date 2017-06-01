@@ -1,0 +1,6 @@
+---
+
+remote_user: 'ceph'
+
+head_group: 'head'
+worker_group: 'worker'

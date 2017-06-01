@@ -19,10 +19,6 @@
   shell: /usr/bin/egrep DirectMap /proc/meminfo|awk '{total+=$2}END{print total/1024}'
   register: memtotal
 
-- name: Configure slaves file
-  template: src=slaves.j2 dest=/hadoop/etc/hadoop/slaves
-  tags: hadoop
-
 - name: Configure core site file
   template: src=core-site.j2 dest=/hadoop/etc/hadoop/core-site.xml
   tags: hadoop
