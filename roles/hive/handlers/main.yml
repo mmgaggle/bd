@@ -7,10 +7,10 @@
 - name: init metastore
   shell: JAVA_HOME=/usr/java/jdk1.8.0_131 HADOOP_HOME=/hadoop /hadoop/hive/bin/schematool -initSchema -dbType mysql
   when:
-  - head in group_names
+  - head_group in group_names
   
 - name: start metastore
   shell: JAVA_HOME=/usr/java/jdk1.8.0_131 HADOOP_HOME=/hadoop nohup /hadoop/hive/bin/hive --service metastore &
 # >/var/log/hive/hive.out 2>/var/log/hive/hive.log &
   when:
-  - head in group_names
+  - head_group in group_names

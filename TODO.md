@@ -1,8 +1,8 @@
 # Hadoop
 
-* Hadoop metrics via Ganglia
+* Hadoop metrics JMX Collectd plugin
 
-https://www.cloudera.com/documentation/enterprise/5-9-x/topics/cm_mc_metrics_ganglia.html
+https://collectd.org/wiki/index.php/Plugin:GenericJMX
 
 # Hive
 

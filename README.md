@@ -1,9 +1,9 @@
 # About
 
-This is an Ansible Playbook to setup all the components that are commonly used
-by data driven organizations. The purpose of the playbook is to accelerate the
-deployment of big data labs, enforcing consistency across labs, and to
-otherwise simply the deployment of a very complex application stack.
+This is an Ansible Playbook to deploy data lab environments with any number of
+tools commonly used by by data driven organizations. The purpose of the playbook
+is to accelerate the deployment of data labs, enforcing consistency across labs,
+for functional and performance testing.
 
 # Dependencies
 
@@ -52,8 +52,26 @@ play:
 
 # Provision Data Lab on Bare Metal
 
-There are two main host groups that need to be defined in your ansible hosts
-file:
+If you decide to deploy to bare metal servers, the current assumption is that
+they are provisioned running Red Hat Enterprise Linux. Distributions like
+CentOS may work, but haven't been tested.
+
+When you deploy to bare metal, you need to specify which group a particular
+node will assume in an Ansible inventory file. There are two main host groups
+for this playbook, with an example inventory named ``hosts`` in the root of the
+playbook repository.
+
+You should change the deploy_method variable in the ``group_vars/all`` file to
+``bare``.
+
+Once you have added your hosts to the inventory file, you can run the site
+play:
+
+```ansible-playbook -i hosts site.yml```
+
+When it finishes, you should have a complete data lab ready to go!
+
+# Deployed Environment
 
 * head
 * worker

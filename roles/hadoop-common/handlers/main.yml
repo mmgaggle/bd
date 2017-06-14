@@ -18,13 +18,9 @@
 
 - name: stop datanode
   shell: JAVA_HOME=/usr/java/jdk1.8.0_131 /hadoop/sbin/hadoop-daemon.sh --config /hadoop/etc/hadoop stop datanode
-  when:
-  - all in group_names
 
 - name: start datanode
   shell: JAVA_HOME=/usr/java/jdk1.8.0_131 /hadoop/sbin/hadoop-daemon.sh --config /hadoop/etc/hadoop start datanode
-  when:
-  - all in group_names
 
 - name: stop resourcemanager
   shell: JAVA_HOME=/usr/java/jdk1.8.0_131 /hadoop/sbin/yarn-daemon.sh --config /hadoop/etc/hadoop stop resourcemanager

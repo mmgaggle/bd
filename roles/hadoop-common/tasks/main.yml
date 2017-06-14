@@ -30,7 +30,7 @@
   - format namenode
   - stop namenode
   - start namenode
-  - stop datanode
+  #- stop datanode
   - start datanode
 
 - name: Configure yarn site file

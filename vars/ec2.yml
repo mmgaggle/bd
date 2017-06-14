@@ -14,7 +14,7 @@ vpc_name: "big_data"
 vpc_cidr_block: "10.0.0.0/16"
 
 # Security Rules 
-my_ip: "47.149.197.198"
+my_ip: "50.225.197.140"
 security_group_name: "big_data"
 
 # Subnets
