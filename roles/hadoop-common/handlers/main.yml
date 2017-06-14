@@ -6,13 +6,13 @@
   when:
   - head_group in group_names
 
-- name: start namenode
-  shell: JAVA_HOME=/usr/java/jdk1.8.0_131 /hadoop/sbin/hadoop-daemon.sh --config /hadoop/etc/hadoop start namenode
+- name: stop namenode
+  shell: JAVA_HOME=/usr/java/jdk1.8.0_131 /hadoop/sbin/hadoop-daemon.sh --config /hadoop/etc/hadoop stop namenode
   when:
   - head_group in group_names
 
-- name: stop namenode
-  shell: JAVA_HOME=/usr/java/jdk1.8.0_131 /hadoop/sbin/hadoop-daemon.sh --config /hadoop/etc/hadoop stop namenode
+- name: start namenode
+  shell: JAVA_HOME=/usr/java/jdk1.8.0_131 /hadoop/sbin/hadoop-daemon.sh --config /hadoop/etc/hadoop start namenode
   when:
   - head_group in group_names
 
@@ -21,6 +21,15 @@
 
 - name: start datanode
   shell: JAVA_HOME=/usr/java/jdk1.8.0_131 /hadoop/sbin/hadoop-daemon.sh --config /hadoop/etc/hadoop start datanode
+
+- name: create user hdfs dir
+  shell: JAVA_HOME=/usr/java/jdk1.8.0_131 /hadoop/bin/hdfs dfs -mkdir /user
+
+- name: create ec2-user hdfs dir
+  shell: JAVA_HOME=/usr/java/jdk1.8.0_131 /hadoop/bin/hdfs dfs -mkdir /user/ec2-user
+
+- name: chown ec2-user hdfs dir
+  shell: JAVA_HOME=/usr/java/jdk1.8.0_131 /hadoop/bin/hdfs dfs -chown ec2-user /user/ec2-user
 
 - name: stop resourcemanager
   shell: JAVA_HOME=/usr/java/jdk1.8.0_131 /hadoop/sbin/yarn-daemon.sh --config /hadoop/etc/hadoop stop resourcemanager
