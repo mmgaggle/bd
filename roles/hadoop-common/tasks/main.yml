@@ -19,6 +19,10 @@
   shell: /usr/bin/egrep DirectMap /proc/meminfo|awk '{total+=$2}END{print total/1024}'
   register: memtotal
 
+- name: Configure profile
+  template: src=profile.j2 dest=/etc/profile.d/hadoop.sh
+  tags: hadoop
+
 - name: Configure core site file
   template: src=core-site.j2 dest=/hadoop/etc/hadoop/core-site.xml
   tags: hadoop
@@ -30,7 +34,7 @@
   - format namenode
   - stop namenode
   - start namenode
-  #- stop datanode
+  - stop datanode
   - start datanode
 
 - name: Configure yarn site file

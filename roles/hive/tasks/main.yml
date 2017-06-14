@@ -17,6 +17,12 @@
   when:
   - head_group in group_names
 
+- name: Configure Hive profile
+  template: src=profile.j2 dest=/etc/profile.d/hive.sh
+  tags: hive
+  when:
+  - head_group in group_names
+
 - name: Configure hive-site file
   template: src=hive-site.j2 dest=/hadoop/hive/conf/hive-site.xml
   tags: hive
