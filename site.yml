@@ -19,3 +19,4 @@
     - hadoop-common
     - hive
     - spark
+    - maven
