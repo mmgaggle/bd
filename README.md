@@ -5,6 +5,13 @@ tools commonly used by by data driven organizations. The purpose of the playbook
 is to accelerate the deployment of data labs, enforcing consistency across labs,
 for functional and performance testing.
 
+Post deploy, the following software will be available inside the data lab:
+
+* Hadoop 2.7.3
+* Spark 2.1.1
+* Hive 2.2.1
+* Presto 0.177
+
 # Dependencies
 
 This playbook depends on the "oracle-java" playbook, you will need to install
@@ -82,20 +89,13 @@ benchmarks from. You should only have one "head" host in your cluster.
 * yarn resource manager
 * yarn history server
 * hdfs namenode
-* zookeeper
-* presto coordinator
 * hive metastore
+* presto coordinator
 
-The "worker" hosts do the heavy lifting.
+The "worker" hosts do the heavy lifting, running map reduce or spark tasks on
+yarn, or processing queries on presto workers.
 
 * yarn node manager
 * hdfs datanode
 * kafka broker
-* kafka consumer (secor)
 * presto worker
-
-# Deploying Hadoop Stack
-
-- To deploy Hadoop Stack , execute
-
-``ansible-playbook -i hosts site.yml``
