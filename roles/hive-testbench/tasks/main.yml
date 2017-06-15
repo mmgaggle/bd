@@ -1,0 +1,26 @@
+---
+# This playbook installs and configures Hive Testbench
+
+- name: Install build tools
+  yum: name={{ item }} state=installed
+  with_items:
+  - git
+  - gcc
+  - unzip
+  - patch
+  when:
+  - head_group in group_names
+
+- git:
+    repo: 'https://github.com/mmgaggle/hive-testbench.git'
+    dest: /hadoop/hive-testbench
+    update: yes
+  when:
+  - head_group in group_names
+
+- name: Build dsgen binaries
+  shell: /bin/bash tpcds-build.sh
+  args:
+    chdir: /hadoop/hive-testbench
+  when:
+  - head_group in group_names

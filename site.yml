@@ -20,3 +20,4 @@
     - hive
     - spark
     - maven
+    - hive-testbench
