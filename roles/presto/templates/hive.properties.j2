@@ -1,0 +1,21 @@
+connector.name=hive-hadoop2
+hive.metastore.uri=thrift://{{hostvars[groups[['head'][0]][0]]['ansible_eth0']['ipv4']['address'] }}:9083
+hive.config.resources=/hadoop/etc/hadoop/core-site.xml,/hadoop/etc/hadoop/hdfs-site.xml
+hive.s3.endpoint={{ endpoint }}
+hive.s3.aws-access-key={{ access_key }}
+hive.s3.aws-secret-key={{ secret_key }}
+hive.s3.use-instance-credentials=false
+hive.s3.staging-directory={{ presto_staging_dir }}
+hive.s3.ssl.enabled={{ ssl_endpoint }}
+hive.s3.sse.enabled=false
+hive.s3.max-connections=100
+hive.s3.connect-timeout=2m
+#hive.s3.socket-timeout=1m
+
+hive.s3.max-client-retries=20
+hive.s3.max-error-retries=20
+#hive.s3.max-backoff-time=1m
+
+#hive.max-split-iterator-threads=100
+#hive.metastore-refresh-interval=10m
+#hive.metastore-cache-ttl=60m

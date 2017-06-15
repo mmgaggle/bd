@@ -1,0 +1,5 @@
+---
+# Handler to handle Presto notifications
+
+- name: Restart Presto
+  shell: '/hadoop/presto/bin/launcher restart'
