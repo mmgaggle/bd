@@ -4,6 +4,9 @@
 # Can be 'bare' for bare metal, or 'ec2'
 deploy_method: 'ec2'
 
+# You can override this with a local directory
+tarball_prefix: 'https://mmgaggle-bd.s3.amazonaws.com'
+
 # S3 setup
 access_key: "{{ lookup('env','AWS_ACCESS_KEY_ID') }}"
 secret_key: "{{ lookup('env','AWS_SECRET_ACCESS_KEY') }}"

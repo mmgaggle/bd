@@ -11,7 +11,7 @@
   tags: maven
 
 - unarchive:
-    src: https://mmgaggle-bd.s3.amazonaws.com/apache-maven-3.5.0-bin.tar.gz
+    src: "{{ tarball_prefix }}/apache-maven-3.5.0-bin.tar.gz"
     dest: /hadoop/maven
     remote_src: True
     extra_opts: "--strip-components=1"

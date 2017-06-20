@@ -9,7 +9,7 @@
   - head_group in group_names
 
 - unarchive:
-    src: https://mmgaggle-bd.s3.amazonaws.com/apache-hive-2.1.1-bin.tar.gz
+    src: "{{ tarball_prefix }}/apache-hive-2.1.1-bin.tar.gz"
     dest: /hadoop/hive
     remote_src: True
     extra_opts: "--strip-components=1"
@@ -20,8 +20,6 @@
 - name: Configure Hive profile
   template: src=profile.j2 dest=/etc/profile.d/hive.sh
   tags: hive
-  when:
-  - head_group in group_names
 
 - name: Configure hive-site file
   template: src=hive-site.j2 dest=/hadoop/hive/conf/hive-site.xml
@@ -93,7 +91,7 @@
   - head_group in group_names
 
 - name: Create hive mysql user and grants
-  mysql_user: name={{ hive_metastore_mysql_user }} password={{ hive_metastore_mysql_password }} priv=*.*:ALL host="{{ ansible_nodename }}" state=present
+  mysql_user: name={{ hive_metastore_mysql_user }} password={{ hive_metastore_mysql_password }} priv=*.*:ALL host="{{ ansible_hostname }}" state=present
   notify:
   - init metastore
   - start metastore
