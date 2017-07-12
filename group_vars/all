@@ -34,6 +34,10 @@ s3a_fast_buffer_size: 1048576       # default 1048576 1 MiB
 # Hadoop
 hadoop_tmp_dir: '/home'
 
+# Spark
+limits_nofile_hard: 65536
+limits_nofile_soft: 65536
+
 # Hive
 mysql_port: 3306
 hive_metastore_database_name: metastore

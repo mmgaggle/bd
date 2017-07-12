@@ -23,6 +23,10 @@
   template: src=profile.j2 dest=/etc/profile.d/hadoop.sh
   tags: hadoop
 
+- name: Configure security limits
+  template: src=limits.conf.j2 dest=/etc/security/limits.conf
+  tags: hadoop
+
 - name: Configure core site file
   template: src=core-site.j2 dest=/hadoop/etc/hadoop/core-site.xml
   tags: hadoop
