@@ -37,3 +37,18 @@
   tags: hive
   when:
   - head_group in group_names
+
+- file:
+    src: /hadoop/spark/jars/scala-library-2.11.8.jar
+    dest: /hadoop/hive/lib/scala-library-2.11.8.jar
+    state: link
+
+- file:
+    src: /hadoop/spark/jars/spark-core_2.11-2.1.1.jar
+    dest: /hadoop/hive/lib/sark-core_2.11-2.1.1.jar
+    state: link
+
+- file:
+    src: /hadoop/spark/jars/spark-network-common_2.11-2.1.1.jar
+    dest: /hadoop/hive/lib/spark-network-common_2.11-2.1.1.jar
+    state: link
