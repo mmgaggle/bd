@@ -14,13 +14,17 @@
     extra_opts: "--strip-components=1"
     creates: /hadoop/spark/LICENSE
 
+- name: Configure spark
+  template: src=spark-default.j2 dest=/hadoop/spark/conf/spark-default.xml
+  tags: spark
+
 - name: Configure profile
   template: src=profile.j2 dest=/etc/profile.d/spark.sh
-  tags: hadoop
+  tags: spark
 
 - name: Configure Spark environment file
   template: src=spark-env.j2 dest=/hadoop/spark/conf/spark-env.sh mode=0755
-  tags: hadoop
+  tags: spark
 
 - file:
     src: /hadoop/share/hadoop/tools/lib/hadoop-aws-2.7.3.jar
@@ -34,7 +38,7 @@
 
 - name: Configure hive-site file
   template: src=hive-site.j2 dest=/hadoop/spark/conf/hive-site.xml
-  tags: hive
+  tags: spark
   when:
   - head_group in group_names
 

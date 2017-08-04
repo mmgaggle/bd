@@ -1,0 +1,12 @@
+---
+# Handlers for Spark History Server
+
+- name: create spark history hdfs directory
+  shell: hadoop fs -mkdir /spark-app-hist
+  when:
+  - head_group in group_names
+
+- name: create spark history hdfs directory
+  shell: /hadoop/spark/sbin/start-history-server.sh
+  when:
+  - head_group in group_names
