@@ -1,5 +1,5 @@
 connector.name=hive-hadoop2
-hive.metastore.uri=thrift://{{hostvars[groups[['head'][0]][0]]['ansible_eth0']['ipv4']['address'] }}:9083
+hive.metastore.uri=thrift://{{ hostvars[groups[[head_group][0]][0]]['ansible_eth0']['ipv4']['address'] }}:9083
 hive.config.resources=/hadoop/etc/hadoop/core-site.xml,/hadoop/etc/hadoop/hdfs-site.xml
 hive.s3.endpoint={{ endpoint }}
 hive.s3.aws-access-key={{ access_key }}

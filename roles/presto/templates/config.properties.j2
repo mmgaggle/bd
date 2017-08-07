@@ -1,4 +1,4 @@
-{% if inventory_hostname in groups['head'] %}
+{% if inventory_hostname in groups[head_group] %}
 coordinator=true
 {% else %}
 coordinator=false
