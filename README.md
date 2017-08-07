@@ -48,6 +48,11 @@ boot your data lab by executing the ``boot.yml`` play:
 
 ```ansible-playbook -i hosts boot.yml```
 
+If you want to avoid having to accept host keys, you can use an environmental
+variable to tell Ansible not to check host SSH keys:
+
+```export ANSIBLE_HOST_KEY_CHECKING=False```
+
 After the data lab is booted, verify ansible can reach all hosts:
 
 ```ansible -i ec2.py -u ec2-user -m ping all```
