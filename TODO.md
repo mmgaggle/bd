@@ -1,6 +1,7 @@
 # TODO
 
 * Change head/worker nomenclature to master/core to match EMR
+* Support configurable number of worker/core nodes
 
 * Setup and configure Spark History Server
 
@@ -10,7 +11,7 @@
 * Figure out SElinux policy for head node so we can leave it enabled
 
 
-* Support for scaling cluster
+* Support for scaling cluster after initial instantiation
 * Support for multiple ec2 clusters (filter ec2.py)
 
 * Hadoop metrics JMX Collectd plugin
@@ -24,4 +25,3 @@
 * Install and configure Zookeeper
 * Install and configure Kafka
 * Install and configure Secor
-
