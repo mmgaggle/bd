@@ -12,20 +12,17 @@
     mode: 0755
  
 - unarchive:
-    src: "{{ tarball_dest_path }}/{{ presto_binary_name }}"
+    src: https://repo1.maven.org/maven2/com/facebook/presto/presto-server/0.177/presto-server-0.177.tar.gz 
     dest: /hadoop/presto
     remote_src: True
     extra_opts: "--strip-components=1"
     creates: /hadoop/presto/README.txt
 
-- copy: 
-    src: "{{ tarball_dest_path }}/{{ presto_cli_name }}"
+- name: Get Presto CLI
+  get_url: 
+    url: https://repo1.maven.org/maven2/com/facebook/presto/presto-cli/0.177/presto-cli-0.177-executable.jar
     dest: /hadoop/presto/presto
     mode: 0700
-
-- name: Configure profile
-  template: src=profile.j2 dest=/etc/profile.d/presto.sh
-  tags: presto 
 
 - name: Configure Presto node properties
   template: src=node.properties.j2 dest=/hadoop/presto/etc/node.properties

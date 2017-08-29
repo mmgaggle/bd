@@ -1,11 +1,11 @@
 {% if inventory_hostname in groups['head'] %}
 coordinator=true
-discovery-server.enabled=true
-node-scheduler.include-coordinator=false
 {% else %}
 coordinator=false
 {% endif %}
+node-scheduler.include-coordinator=false
 http-server.http.port=8880
-query.max-memory=960GB
-query.max-memory-per-node=40GB
+query.max-memory=1200GB
+query.max-memory-per-node=50GB
+discovery-server.enabled=true
 discovery.uri=http://{{ hostvars[groups[[head_group][0]][0]]['ansible_ens20f0']['ipv4']['address'] }}:8880

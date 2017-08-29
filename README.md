@@ -39,8 +39,8 @@ You will also need to export your **AWS_ACCESS_KEY** and **AWS_SECRET_KEY** as
 environment variables:
 
 ```
-export AWS_ACCESS_KEY='Your_AWS_Access_Key_Here'
-export AWS_SECRET_KEY='Your_AWS_Secret_Key_Here'
+export AWS_ACCESS_KEY_ID='Your_AWS_Access_Key_Here'
+export AWS_SECRET_ACCESS_KEY='Your_AWS_Secret_Key_Here'
 ```
 
 With the ansible and environmental variables set, you can instruct Ansible to

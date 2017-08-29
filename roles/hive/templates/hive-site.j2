@@ -18,7 +18,7 @@
 <configuration>
   <property>
     <name>javax.jdo.option.ConnectionURL</name>
-    <value>jdbc:mysql://{{ hostvars[groups[[head_group][0]][0]]['ansible_eth0']['ipv4']['address'] }}:{{ mysql_port }}/{{ hive_metastore_database_name }}</value>
+    <value>jdbc:mysql://{{ hostvars[groups[[head_group][0]][0]]['ansible_ens20f0']['ipv4']['address'] }}:{{ mysql_port }}/{{ hive_metastore_database_name }}</value>
   </property>
   <property>
     <name>javax.jdo.option.ConnectionDriverName</name>
@@ -51,5 +51,17 @@
   <property>
     <name>hive.metastore.schema.verification</name>
     <value>false</value>
+  </property>
+  <property>
+    <name>hive.warehouse.subdir.inherit.perms</name>
+    <value>false</value>
+  </property>
+  <property>
+    <name>hive.metastore.pre.event.listeners</name>
+    <value></value>
+  </property>
+  <property>
+    <name>hive.orc.compute.splits.num.threads</name>
+    <value>64</value>
   </property>
 </configuration>

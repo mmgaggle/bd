@@ -1,6 +1,6 @@
 ---
 
-remote_user: 'ceph'
+remote_user: 'root'
 
 head_group: 'head'
 worker_group: 'worker'

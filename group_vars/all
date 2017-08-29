@@ -2,15 +2,29 @@
 # Variables listed here are applicable to all host groups
 
 # Can be 'bare' for bare metal, or 'ec2'
-deploy_method: 'ec2'
+deploy_method: 'bare'
 
 # You can override this with a local directory
-tarball_prefix: 'https://mmgaggle-bd.s3.amazonaws.com'
+tarball_dest_path: '/root'
+
+hadoop_version: '2.8.1'
+spark_version: '2.2.0'
+presto_version: '0.170'
+hive_version: '2.1.1'
+maven_version: '3.5.0'
+
+hadoop_binary_name: hadoop-{{ hadoop_version }}.tar.gz
+spark_binary_name: spark-{{ spark_version }}-bin-hadoop2.7.tgz
+#spark_binary_name: spark-{{ spark_version }}-bin-without-hadoop.tgz
+presto_binary_name: presto-server-{{ presto_version }}.tar.gz
+presto_cli_name: presto-cli-{{ presto_version }}-executable.jar
+hive_binary_name: apache-hive-{{ hive_version }}-bin.tar.gz
+maven_binary_name: apache-maven-{{ maven_version }}-bin.tar.gz
 
 # S3 setup
 access_key: "{{ lookup('env','AWS_ACCESS_KEY_ID') }}"
 secret_key: "{{ lookup('env','AWS_SECRET_ACCESS_KEY') }}"
-endpoint: s3.amazonaws.com
+endpoint: s3.qct.io
 ssl_endpoint: false
 
 ntpserver: time.nasa.gov
@@ -18,7 +32,7 @@ ntpserver: time.nasa.gov
 # S3A Performance Tuning
 s3a_connection_max: 15              # default 15
 s3a_attempts_max: 10                # default 10
-s3a_conn_establish_timeout: 5000    # default 5000
+s3a_conn_establish_timeout: 50001    # default 5000
 s3a_conn_timeout: 50000             # default 50000
 s3a_page_max: 5000                  # default 5000
 s3a_keepalive: 60                   # default 60
@@ -27,12 +41,17 @@ s3a_threads_core: 15                # default 15
 s3a_max_total_tasks: 1000           # default 1000
 s3a_multipart_size: 104857600       # default 104857600  100 MiB
 s3a_multipart_threshold: 2147483647 # default 2147483647 2 GiB - 1 byte
+s3a_input_fadvise: 'random'	    # default 'normal'
 
 s3a_fast_upload: 'false'            # default false
 s3a_fast_buffer_size: 1048576       # default 1048576 1 MiB
 
+s3a_buffer_dir: '/home/s3a'
+yarn_local_dirs: '/home'
+yarn_app_log_dir: 's3a://app-logs/'
+
 # Hadoop
-hadoop_tmp_dir: '/home'
+hadoop_tmp_dir: '/hadoop/tmp'
 
 # Spark
 limits_nofile_hard: 65536
@@ -44,11 +63,37 @@ hive_metastore_database_name: metastore
 hive_metastore_mysql_user: hive
 hive_metastore_mysql_password: password
 
-hive_metastore_warehouse_dir: s3a://sa-summit-demo/
-hive_scratchdir: s3a://sa-summit-demo/
+hive_metastore_warehouse_dir: s3a://hive/
+hive_scratchdir: s3a://tmp/
 
 # Presto
-presto_staging_dir: /tmp/presto
+# https://github.com/prestodb/presto/blob/master/presto-hive/src/main/java/com/facebook/presto/hive/HiveS3Config.java
+# https://github.com/prestodb/presto/blob/007471c129ef95a794882df6eaa2a8b489884fe0/presto-hive/src/main/java/com/facebook/presto/hive/HiveClientConfig.java
+presto_staging_dir: /home/tmp/presto
+
+## Presto 0.170 Tuned setings
+#presto_max_conns: 500
+#presto_conn_timeout: 5m 
+#presto_socket_timeout: 5m 
+#presto_max_client_retries: 50 
+#presto_max_error_retries: 50 
+#presto_max_backoff_times: 10m 
+#presto_max_retry_time: 20m 
+#presto_metastore_refresh_interval: 1m
+#presto_metastore_timeout: 1m
+#presto_metastore_cache_ttl: 1m
+
+## Presto 0.170 Default settings
+presto_max_conns: 500
+presto_conn_timeout: 5m
+presto_socket_timeout: 5m
+presto_max_retry_time: 10m
+presto_max_backoff_times: 10m 
+presto_max_client_retries: 3         
+presto_max_error_retries: 10         
+presto_metastore_timeout: 10s       
+presto_metastore_refresh_interval: 0s
+presto_metastore_cache_ttl: 0s
 
 # Secor
 secor_bucket: 'stream'

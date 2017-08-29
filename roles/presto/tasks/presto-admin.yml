@@ -2,6 +2,24 @@
 # This playbook installs Presto
 
 - file:
+    path: /hadoop/presto/prestoadmin
+    state: directory
+    mode: 0755
+
+- name: Get Presto-Admin
+  get_url:
+    url: https://github.com/prestodb/presto-admin/releases/download/2.2/prestoadmin-2.2-offline.tar.gz
+    dest: /hadoop/presto
+    mode: 0700
+
+- unarchive:
+    src: /hadoop/presto/prestoadmin-2.2-offline.tar.gz
+    dest: /hadoop/presto/prestoadmin
+    remote_src: True
+    extra_opts: "--strip-components=1"
+    creates: /hadoop/presto/README.txt
+
+- file:
     path: /hadoop/presto/etc/catalog
     state: directory
     mode: 0755
@@ -12,20 +30,16 @@
     mode: 0755
  
 - unarchive:
-    src: "{{ tarball_dest_path }}/{{ presto_binary_name }}"
+    src: /tmp/presto-server-0.170.tar.gz
     dest: /hadoop/presto
     remote_src: True
     extra_opts: "--strip-components=1"
     creates: /hadoop/presto/README.txt
 
-- copy: 
-    src: "{{ tarball_dest_path }}/{{ presto_cli_name }}"
+- copy:
+    src: /tmp/presto-cli-0.170-executable.jar
     dest: /hadoop/presto/presto
     mode: 0700
-
-- name: Configure profile
-  template: src=profile.j2 dest=/etc/profile.d/presto.sh
-  tags: presto 
 
 - name: Configure Presto node properties
   template: src=node.properties.j2 dest=/hadoop/presto/etc/node.properties

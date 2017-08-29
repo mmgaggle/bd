@@ -8,7 +8,7 @@
 
 
 - unarchive:
-    src: "{{ tarball_prefix }}/spark-2.1.1-bin-hadoop2.7.tgz"
+    src: "{{ tarball_dest_path }}/{{ spark_binary_name }}"
     dest: /hadoop/spark
     remote_src: True
     extra_opts: "--strip-components=1"
@@ -23,14 +23,19 @@
   tags: hadoop
 
 - file:
-    src: /hadoop/share/hadoop/tools/lib/hadoop-aws-2.7.3.jar
-    dest: /hadoop/spark/jars/hadoop-aws-2.7.3.jar
+    src: /hadoop/share/hadoop/tools/lib/hadoop-aws-{{ hadoop_version }}.jar
+    dest: /hadoop/spark/jars/hadoop-aws-{{ hadoop_version }}.jar
     state: link
 
+- name: Get aws-java-sdk*.jar file names
+  shell: "cd /hadoop/share/hadoop/tools/lib ; ls aws-java-sdk*"
+  register: aws_java_sdk_jar_name
+
 - file:
-    src: /hadoop/share/hadoop/tools/lib/aws-java-sdk-1.7.4.jar
-    dest: /hadoop/spark/jars/aws-java-sdk-1.7.4.jar
+    src: /hadoop/share/hadoop/tools/lib/{{ item }}
+    dest: /hadoop/spark/jars/{{ item }} 
     state: link
+  with_items: "{{ aws_java_sdk_jar_name.stdout_lines }}"
 
 - name: Configure hive-site file
   template: src=hive-site.j2 dest=/hadoop/spark/conf/hive-site.xml

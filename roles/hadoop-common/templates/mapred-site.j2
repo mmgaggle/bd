@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
 <?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+
 <!--
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
@@ -13,6 +14,7 @@
   See the License for the specific language governing permissions and
   limitations under the License. See accompanying LICENSE file.
 -->
+
 
 <!-- Put site-specific property overrides in this file. -->
 
@@ -99,11 +101,11 @@
   </property>
   <property>
     <name>mapreduce.jobhistory.address</name>
-    <value>{{ hostvars[groups[[head_group][0]][0]]['ansible_eth0']['ipv4']['address'] }}:10020</value>
+    <value>{{ hostvars[groups[[head_group][0]][0]]['ansible_ens20f0']['ipv4']['address'] }}:10020</value>
   </property>
   <property>
     <name>mapreduce.jobhistory.webapp.address</name>
-    <value>{{ hostvars[groups[[head_group][0]][0]]['ansible_eth0']['ipv4']['address'] }}:19888</value>
+    <value>{{ hostvars[groups[[head_group][0]][0]]['ansible_ens20f0']['ipv4']['address'] }}:19888</value>
   </property>
   <property>
     <name>mapreduce.fileoutputcommitter.algorithm.version</name>

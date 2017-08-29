@@ -1,0 +1,3 @@
+spark.eventLog.enabled=true
+spark.eventLog.dir=hdfs://10.102.46.57:50070/spark-app-hist
+spark.yarn.historyServer.address=10.102.46.57:18080

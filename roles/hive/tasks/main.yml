@@ -9,7 +9,7 @@
   - head_group in group_names
 
 - unarchive:
-    src: "{{ tarball_prefix }}/apache-hive-2.1.1-bin.tar.gz"
+    src: "{{ tarball_dest_path }}/{{ hive_binary_name }}"
     dest: /hadoop/hive
     remote_src: True
     extra_opts: "--strip-components=1"
@@ -29,17 +29,36 @@
   when:
   - head_group in group_names
 
+#- file:
+#    src: /hadoop/share/hadoop/tools/lib/hadoop-aws-2.7.3.jar
+#    dest: /hadoop/hive/lib/hadoop-aws-2.7.3.jar
+#    state: link
+#  when:
+#  - head_group in group_names
+#
+#- file:
+#    src: /hadoop/share/hadoop/tools/lib/aws-java-sdk-1.7.4.jar
+#    dest: /hadoop/hive/lib/aws-java-sdk-1.7.4.jar
+#    state: link
+#  when:
+#  - head_group in group_names
+
 - file:
-    src: /hadoop/share/hadoop/tools/lib/hadoop-aws-2.7.3.jar
-    dest: /hadoop/hive/lib/hadoop-aws-2.7.3.jar
+    src: /hadoop/share/hadoop/tools/lib/hadoop-aws-{{ hadoop_version }}.jar
+    dest: /hadoop/hive/lib/hadoop-aws-{{ hadoop_version }}.jar
     state: link
   when:
   - head_group in group_names
 
+- name: Get aws-java-sdk*.jar file names
+  shell: "cd /hadoop/share/hadoop/tools/lib ; ls aws-java-sdk*"
+  register: aws_java_sdk_jar_name
+
 - file:
-    src: /hadoop/share/hadoop/tools/lib/aws-java-sdk-1.7.4.jar
-    dest: /hadoop/hive/lib/aws-java-sdk-1.7.4.jar
+    src: /hadoop/share/hadoop/tools/lib/{{ item }}
+    dest: /hadoop/hive/lib/{{ item }}
     state: link
+  with_items: "{{ aws_java_sdk_jar_name.stdout_lines }}"
   when:
   - head_group in group_names
 
@@ -67,7 +86,7 @@
   - head_group in group_names
 
 - name: Create mariadb files and directories
-  file: path="{{ item.path }}" mode=0755 owner=mysql group=mysql state="{{ item.state }}"
+  file: path={{ item.path }} mode=0755 owner=mysql group=mysql state={{ item.state }}
   with_items:
   - { path: /var/run/mysqld, state: directory }
   - { path: /var/log/mysqld.log, state: touch }

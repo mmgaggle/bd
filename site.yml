@@ -16,8 +16,9 @@
       oracle_java_version_build: 11,
       oracle_java_rpm_url: "http://download.oracle.com/otn-pub/java/jdk/{{ oracle_java_version }}u{{ oracle_java_version_update }}-b{{ oracle_java_version_build }}/d54c1d3a095b4ff2b6607d096fa80163/{{ oracle_java_rpm_filename }}"}
     - common
-    - hadoop-common
-    - hive
+#    - hadoop-common
+#    - hive
     - spark
-    - maven
-    - hive-testbench
+#    - maven
+#    - hive-testbench
+    - { role: presto, tags: presto }

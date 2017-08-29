@@ -1,0 +1,34 @@
+---
+# This playbook deploys the whole application stack in this site.
+
+- name: apply common configuration to all nodes
+  hosts: all:!localhost
+  remote_user: '{{ remote_user }}'
+  become: yes
+  become_method: sudo
+  vars_files:
+    - "vars/{{ deploy_method }}.yml"
+  tasks:
+
+  - name: stop namenode
+    shell: JAVA_HOME=/usr/java/jdk1.8.0_131 /hadoop/sbin/hadoop-daemon.sh --config /hadoop/etc/hadoop stop namenode     
+    when:
+      - head_group in group_names
+
+  - name: stop datanode
+    shell: JAVA_HOME=/usr/java/jdk1.8.0_131 /hadoop/sbin/hadoop-daemon.sh --config /hadoop/etc/hadoop stop datanode
+  
+  - name: stop resourcemanager
+    shell: JAVA_HOME=/usr/java/jdk1.8.0_131 /hadoop/sbin/yarn-daemon.sh --config /hadoop/etc/hadoop stop resourcemanager
+    when: 
+    - head_group in group_names
+
+  - name: stop historyserver
+    shell: JAVA_HOME=/usr/java/jdk1.8.0_131 /hadoop/sbin/mr-jobhistory-daemon.sh --config /hadoop/etc/hadoop stop historyserver
+    when:
+    - head_group in group_names
+
+  - name: stop nodemanager
+    shell: JAVA_HOME=/usr/java/jdk1.8.0_131 /hadoop/sbin/yarn-daemon.sh --config /hadoop/etc/hadoop stop nodemanager
+    when:
+    - worker_group in group_names

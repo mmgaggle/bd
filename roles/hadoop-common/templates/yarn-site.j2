@@ -1,4 +1,5 @@
 <?xml version="1.0"?>
+
 <!--
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
@@ -12,6 +13,7 @@
   See the License for the specific language governing permissions and
   limitations under the License. See accompanying LICENSE file.
 -->
+
 
 <!-- Site specific YARN configuration properties -->
 
@@ -46,15 +48,15 @@
   </property>
   <property>
     <name>yarn.nodemanager.local-dirs</name>
-    <value>/hadoop/yarn/nm</value>
+    <value>{{ yarn_local_dirs }}</value>
   </property>
   <property>
     <name>yarn.log.server.url</name>
-    <value>http://{{ hostvars[groups[[head_group][0]][0]]['ansible_eth0']['ipv4']['address'] }}:19888/jobhistory/logs</value>
+    <value>http://{{ hostvars[groups[[head_group][0]][0]]['ansible_ens20f0']['ipv4']['address'] }}:19888/jobhistory/logs</value>
   </property>
   <property>
     <name>yarn.timeline-service.hostname</name>
-    <value>{{ hostvars[groups[[head_group][0]][0]]['ansible_eth0']['ipv4']['address'] }}</value>
+    <value>{{ hostvars[groups[[head_group][0]][0]]['ansible_ens20f0']['ipv4']['address'] }}</value>
   </property>
   <property>
     <name>yarn.resourcemanager.system-metrics-publisher.enabled</name>
@@ -70,23 +72,23 @@
   </property>
   <property>
     <name>yarn.resourcemanager.address</name>
-    <value>{{ hostvars[groups[[head_group][0]][0]]['ansible_eth0']['ipv4']['address'] }}:8032</value>
+    <value>{{ hostvars[groups[[head_group][0]][0]]['ansible_ens20f0']['ipv4']['address'] }}:8032</value>
   </property>
   <property>
     <name>yarn.resourcemanager.scheduler.address</name>
-    <value>{{ hostvars[groups[[head_group][0]][0]]['ansible_eth0']['ipv4']['address'] }}:8030</value>
+    <value>{{ hostvars[groups[[head_group][0]][0]]['ansible_ens20f0']['ipv4']['address'] }}:8030</value>
   </property>
   <property>
     <name>yarn.resourcemanager.resource-tracker.address</name>
-    <value>{{ hostvars[groups[[head_group][0]][0]]['ansible_eth0']['ipv4']['address'] }}:8031</value>
+    <value>{{ hostvars[groups[[head_group][0]][0]]['ansible_ens20f0']['ipv4']['address'] }}:8031</value>
   </property>
   <property>
     <name>yarn.resourcemanager.admin.address</name>
-    <value>{{ hostvars[groups[[head_group][0]][0]]['ansible_eth0']['ipv4']['address'] }}:8033</value>
+    <value>{{ hostvars[groups[[head_group][0]][0]]['ansible_ens20f0']['ipv4']['address'] }}:8033</value>
   </property>
   <property>
     <name>yarn.resourcemanager.webapp.address</name>
-    <value>{{ hostvars[groups[[head_group][0]][0]]['ansible_eth0']['ipv4']['address'] }}:8088</value>
+    <value>{{ hostvars[groups[[head_group][0]][0]]['ansible_ens20f0']['ipv4']['address'] }}:8088</value>
   </property> 
   <property>
     <name>yarn.log-aggregation-enable</name>
@@ -94,7 +96,7 @@
   </property>
   <property>
      <name>yarn.nodemanager.remote-app-log-dir</name>
-     <value>/app-logs</value>
+     <value>{{ yarn_app_log_dir }}</value>
   </property>
   <property>
       <name>yarn.nodemanager.remote-app-log-dir-suffix</name>

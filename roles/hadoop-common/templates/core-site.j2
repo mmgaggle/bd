@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+
 <!--
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
@@ -13,7 +14,6 @@
   See the License for the specific language governing permissions and
   limitations under the License. See accompanying LICENSE file.
 -->
-
 <!-- Put site-specific property overrides in this file. -->
 
 <configuration>
@@ -82,8 +82,16 @@
     <value>{{ s3a_fast_upload }}</value>
   </property>
   <property>
-    <name>fs.s3a.fast.buffer.size</name>
-    <value>1048576</value>
+    <name>fs.s3a.fast.upload.buffer</name>
+    <value>disk</value>
+  </property>
+  <property>
+    <name>fs.s3a.buffer.dir</name>
+    <value>{{ s3a_buffer_dir }}</value>
+  </property>
+  <property>
+    <name>fs.s3a.experimental.input.fadvise</name>
+    <value>{{ s3a_input_fadvise }}</value>
   </property>
   <property>
     <name>fs.s3a.multiobjectdelete.enable</name>
@@ -91,7 +99,7 @@
   </property>
   <property>
     <name>fs.defaultFS</name>
-    <value>hdfs://{{ hostvars[groups[[head_group][0]][0]]['ansible_eth0']['ipv4']['address'] }}:8020/</value>
+    <value>hdfs://{{ hostvars[groups[[head_group][0]][0]]['ansible_ens20f0']['ipv4']['address'] }}:8020/</value>
   </property>
   <property>
     <name>hadoop.tmp.dir</name>
@@ -100,5 +108,10 @@
   <property>
     <name>fs.s3a.impl</name>
     <value>org.apache.hadoop.fs.s3a.S3AFileSystem</value>
+  </property>
+  <property>
+    <name>fs.AbstractFileSystem.s3a.impl</name>
+    <value>org.apache.hadoop.fs.s3a.S3A</value>
+    <description>The implementation class of the S3A AbstractFileSystem.</description>
   </property>
 </configuration>

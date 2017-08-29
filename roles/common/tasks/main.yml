@@ -13,3 +13,23 @@
 - name: Start the ntp service
   service: name=ntpd state=started enabled=yes
   tags: ntp
+
+- name: Copying Hadoop binaries to nodes
+  copy: src={{ hadoop_binary_name }} dest={{ tarball_dest_path }} 
+
+- name: Copying Spark binaries to nodes
+  copy: src={{ spark_binary_name }} dest={{ tarball_dest_path }}
+
+- name: Copying presto binaries to nodes
+  copy: src={{ presto_binary_name }} dest={{ tarball_dest_path }}
+
+- name: Copying presto cli to nodes
+  copy: src={{ presto_cli_name }} dest={{ tarball_dest_path }}
+
+- name: Copying Hive binaries to nodes
+  copy: src={{ hive_binary_name }} dest={{ tarball_dest_path }}
+  when:
+  - head_group in group_names
+
+- name: Copying Maven binaries to nodes
+  copy: src={{ maven_binary_name }} dest={{ tarball_dest_path }}
