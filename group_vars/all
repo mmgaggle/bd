@@ -4,9 +4,6 @@
 # Can be 'bare' for bare metal, or 'ec2'
 deploy_method: 'ec2'
 
-# You can override this with a local directory
-tarball_prefix: 'https://mmgaggle-bd.s3.amazonaws.com'
-
 # S3 setup
 access_key: "{{ lookup('env','AWS_ACCESS_KEY_ID') }}"
 secret_key: "{{ lookup('env','AWS_SECRET_ACCESS_KEY') }}"
@@ -30,7 +27,7 @@ s3a_multipart_threshold: 2147483647 # default 2147483647 2 GiB - 1 byte
 
 s3a_fast_upload: 'false'            # default false
 s3a_fast_buffer_size: 1048576       # default 1048576 1 MiB
-s3a_buffer_dir: '/tmp'
+s3a_buffer_dir: '/tmp/s3a'
 
 # Hadoop
 hadoop_tmp_dir: '/home'
@@ -49,7 +46,7 @@ hive_metastore_warehouse_dir: s3a://sa-summit-demo/
 hive_scratchdir: s3a://sa-summit-demo/
 
 # Presto
-presto_staging_dir: /tmp/presto
+presto_staging_dir: '/tmp/presto'
 
 # Secor
 secor_bucket: 'stream'
