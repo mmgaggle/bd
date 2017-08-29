@@ -1,6 +1,5 @@
 # TODO
 
-* Change head/worker nomenclature to master/core to match EMR
 * Support configurable number of worker/core nodes
 
 * Setup and configure Spark History Server

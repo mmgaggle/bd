@@ -30,6 +30,7 @@ s3a_multipart_threshold: 2147483647 # default 2147483647 2 GiB - 1 byte
 
 s3a_fast_upload: 'false'            # default false
 s3a_fast_buffer_size: 1048576       # default 1048576 1 MiB
+s3a_buffer_dir: '/tmp'
 
 # Hadoop
 hadoop_tmp_dir: '/home'

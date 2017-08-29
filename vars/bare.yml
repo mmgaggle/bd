@@ -2,5 +2,5 @@
 
 remote_user: 'ceph'
 
-head_group: 'head'
-worker_group: 'worker'
+master_group: 'master'
+core_group: 'core'

@@ -9,18 +9,18 @@
   - unzip
   - patch
   when:
-  - head_group in group_names
+  - master_group in group_names
 
 - git:
     repo: 'https://github.com/mmgaggle/hive-testbench.git'
     dest: /hadoop/hive-testbench
     update: yes
   when:
-  - head_group in group_names
+  - master_group in group_names
 
 - name: Build dsgen binaries
   shell: /bin/bash tpcds-build.sh
   args:
     chdir: /hadoop/hive-testbench
   when:
-  - head_group in group_names
+  - master_group in group_names

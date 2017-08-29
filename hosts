@@ -2,8 +2,8 @@
 localhost ansible_connection=local ansible_python_interpreter=/usr/local/bin/python
 
 # There should be a single host in this host group
-[head]
+[master]
 
 # All other compute hosts should be in this host group
-[worker]
+[core]
 

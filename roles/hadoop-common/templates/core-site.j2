@@ -95,7 +95,7 @@
   </property>
   <property>
     <name>fs.defaultFS</name>
-    <value>hdfs://{{ hostvars[groups[[head_group][0]][0]]['ansible_eth0']['ipv4']['address'] }}:8020/</value>
+    <value>hdfs://{{ hostvars[groups[[master_group][0]][0]]['ansible_eth0']['ipv4']['address'] }}:8020/</value>
   </property>
   <property>
     <name>hadoop.tmp.dir</name>

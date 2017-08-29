@@ -85,11 +85,11 @@ When it finishes, you should have a complete data lab ready to go!
 
 # Deployed Environment
 
-* head
-* worker
+* master 
+* core
 
-The "head" host runs cluster services, and serve as a client bastion to launch
-benchmarks from. You should only have one "head" host in your cluster.
+The "master" host runs cluster services, and serve as a client bastion to launch
+benchmarks from. You should only have one "master" host in your cluster.
 
 * yarn resource manager
 * yarn history server
@@ -97,7 +97,7 @@ benchmarks from. You should only have one "head" host in your cluster.
 * hive metastore
 * presto coordinator
 
-The "worker" hosts do the heavy lifting, running map reduce or spark tasks on
+The "core" hosts do the heavy lifting, running map reduce or spark tasks on
 yarn, or processing queries on presto workers.
 
 * yarn node manager

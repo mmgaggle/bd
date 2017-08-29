@@ -1,4 +1,4 @@
-{% if inventory_hostname in groups[head_group] %}
+{% if inventory_hostname in groups[master_group] %}
 coordinator=true
 {% else %}
 coordinator=false
@@ -8,4 +8,4 @@ http-server.http.port=8880
 query.max-memory=1200GB
 query.max-memory-per-node=50GB
 discovery-server.enabled=true
-discovery.uri=http://{{ hostvars[groups[[head_group][0]][0]]['ansible_eth0']['ipv4']['address'] }}:8880
+discovery.uri=http://{{ hostvars[groups[[master_group][0]][0]]['ansible_eth0']['ipv4']['address'] }}:8880

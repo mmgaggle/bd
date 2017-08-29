@@ -4,9 +4,9 @@
 - name: create spark history hdfs directory
   shell: hadoop fs -mkdir /spark-app-hist
   when:
-  - master_group in group_names
+  - head_group in group_names
 
 - name: create spark history hdfs directory
   shell: /hadoop/spark/sbin/start-history-server.sh
   when:
-  - master_group in group_names
+  - head_group in group_names
