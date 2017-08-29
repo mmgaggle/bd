@@ -110,7 +110,7 @@
   - head_group in group_names
 
 - name: Create hive mysql user and grants
-  mysql_user: name={{ hive_metastore_mysql_user }} password={{ hive_metastore_mysql_password }} priv=*.*:ALL host="{{ ansible_hostname }}" state=present
+  mysql_user: name={{ hive_metastore_mysql_user }} password={{ hive_metastore_mysql_password }} priv=*.*:ALL host="{{ ansible_fqdn }}" state=present
   notify:
   - init metastore
   - start metastore
