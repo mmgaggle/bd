@@ -9,7 +9,7 @@
   - master_group in group_names
 
 - unarchive:
-    src: "{{ tarball_prefix }}/apache-hive-2.1.1-bin.tar.gz"
+    src: "{{ tarball_prefix }}/{{ hive_tarball}}"
     dest: /hadoop/hive
     remote_src: True
     extra_opts: "--strip-components=1"
@@ -29,17 +29,13 @@
   when:
   - master_group in group_names
 
-- file:
-    src: /hadoop/share/hadoop/tools/lib/hadoop-aws-2.7.3.jar
-    dest: /hadoop/hive/lib/hadoop-aws-2.7.3.jar
-    state: link
-  when:
-  - master_group in group_names
-
-- file:
-    src: /hadoop/share/hadoop/tools/lib/aws-java-sdk-1.7.4.jar
-    dest: /hadoop/hive/lib/aws-java-sdk-1.7.4.jar
-    state: link
+- name: Link Hadoop libraries
+  file: src=/hadoop/share/hadoop/tools/lib/{{ item }} dest=/hadoop/hive/lib/{{ item }} state=link
+  with_items:
+  - hadoop-aws-2.8.1.jar
+  - aws-java-sdk-core-1.10.6.jar
+  - aws-java-sdk-kms-1.10.6.jar
+  - aws-java-sdk-s3-1.10.6.jar
   when:
   - master_group in group_names
 

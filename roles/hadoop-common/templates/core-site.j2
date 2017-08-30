@@ -18,20 +18,32 @@
 
 <configuration>
   <property>
-    <name>fs.s3a.endpoint</name>
-    <value>{{ endpoint }}</value>
+    <name>fs.defaultFS</name>
+    <value>hdfs://{{ hostvars[groups[[master_group][0]][0]]['ansible_eth0']['ipv4']['address'] }}:8020/</value>
+  </property>
+  <property>
+    <name>hadoop.tmp.dir</name>
+    <value>{{ hadoop_tmp_dir }}</value>
   </property>
   <property>
     <name>fs.s3a.access.key</name>
-    <value>{{ access_key }}</value>
+    <value>{{ aws_access_key }}</value>
   </property>
   <property>
     <name>fs.s3a.secret.key</name>
-    <value>{{ secret_key }}</value>
+    <value>{{ aws_secret_key }}</value>
+  </property>
+  <property>
+    <name>fs.s3a.endpoint</name>
+    <value>{{ s3a_endpoint }}</value>
   </property>
   <property>
     <name>fs.s3a.connection.ssl.enabled</name>
-    <value>{{ ssl_endpoint }}</value>
+    <value>{{ s3a_ssl_enabled }}</value>
+  </property>
+  <property>
+    <name>fs.s3a.path.style.access</name>
+    <value>{{ s3a_path_style_access }}</value>
   </property>
   <property>
     <name>fs.s3a.connection.maximum</name>
@@ -58,8 +70,12 @@
     <value>{{ s3a_threads_max }}</value>
   </property>
   <property>
-    <name>fs.s3a.threads.core</name>
-    <value>{{ s3a_threads_core }}</value>
+    <name>fs.s3a.socket.send.buffer</name>
+    <value>{{ s3a_socket_send_buffer }}</value>
+  </property>
+  <property>
+    <name>fs.s3a.socket.recv.buffer</name>
+    <value>{{ s3a_socket_recv_buffer }}</value>
   </property>
   <property>
     <name>fs.s3a.threads.keepalivetime</name>
@@ -78,31 +94,59 @@
     <value>{{ s3a_multipart_threshold }}</value>
   </property>
   <property>
-    <name>fs.s3a.fast.upload</name>
-    <value>{{ s3a_fast_upload }}</value>
+    <name>fs.s3a.multiobjectdelete.enable</name>
+    <value>{{ s3a_multiobjectdelete_enable }}</value>
+  </property>
+  <property>
+    <name>fs.s3a.multipart.purge</name>
+    <value>{{ s3a_multipart_purge }}</value>
+  </property>
+  <property>
+    <name>fs.s3a.multipart.purge.age</name>
+    <value>{{ s3a_multipart_purge_age }}</value>
+  </property>
+  <property>
+    <name>fs.s3a.signing-algorithm</name>
+    <value>{{ s3a_signing_algorithm }}</value>
   </property>
    <property>
     <name>fs.s3a.buffer.dir</name>
     <value>{{ s3a_buffer_dir }}</value>
   </property>
   <property>
-    <name>fs.s3a.fast.buffer.size</name>
-    <value>1048576</value>
+    <name>fs.s3a.block.size</name>
+    <value>{{ s3a_block_size }}</value>
   </property>
   <property>
-    <name>fs.s3a.multiobjectdelete.enable</name>
-    <value>true</value>
-  </property>
-  <property>
-    <name>fs.defaultFS</name>
-    <value>hdfs://{{ hostvars[groups[[master_group][0]][0]]['ansible_eth0']['ipv4']['address'] }}:8020/</value>
-  </property>
-  <property>
-    <name>hadoop.tmp.dir</name>
-    <value>{{ hadoop_tmp_dir }}</value>
+    <name>fs.s3a.user.agent.prefix</name>
+    <value>{{ s3a_user_agent_prefix }}</value>
   </property>
   <property>
     <name>fs.s3a.impl</name>
     <value>org.apache.hadoop.fs.s3a.S3AFileSystem</value>
+  </property>
+  <property>
+    <name>fs.AbstractFileSystem.s3a.impl</name>
+    <value>org.apache.hadoop.fs.s3a.S3A</value>
+  </property>
+  <property>
+    <name>fs.s3a.readahead.range</name>
+    <value>{{ s3a_readahead_range }}</value>
+  </property>
+  <property>
+    <name>fs.s3a.fast.upload</name>
+    <value>{{ s3a_fast_upload }}</value>
+  </property>
+  <property>
+    <name>fs.s3a.fast.upload.buffer</name>
+    <value>{{ s3a_fast_upload_buffer }}</value>
+  </property>
+  <property>
+    <name>fs.s3a.fast.upload.active.blocks</name>
+    <value>{{ s3a_fast_upload_active_blocks }}</value>
+  </property>
+  <property>
+    <name>fs.s3a.experimental.input.fadvise</name>
+    <value>{{ s3a_input_fadvise }}</value>
   </property>
 </configuration>

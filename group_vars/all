@@ -4,33 +4,62 @@
 # Can be 'bare' for bare metal, or 'ec2'
 deploy_method: 'ec2'
 
-# S3 setup
-access_key: "{{ lookup('env','AWS_ACCESS_KEY_ID') }}"
-secret_key: "{{ lookup('env','AWS_SECRET_ACCESS_KEY') }}"
-endpoint: s3.amazonaws.com
-ssl_endpoint: false
+# Set secrets via environmental variables
+aws_access_key: "{{ lookup('env','AWS_ACCESS_KEY_ID') }}"
+aws_secret_key: "{{ lookup('env','AWS_SECRET_ACCESS_KEY') }}"
 
+# Set NTP time server
 ntpserver: time.nasa.gov
 
-# S3A Performance Tuning
-s3a_connection_max: 15              # default 15
-s3a_attempts_max: 10                # default 10
-s3a_conn_establish_timeout: 5000    # default 5000
-s3a_conn_timeout: 50000             # default 50000
-s3a_page_max: 5000                  # default 5000
-s3a_keepalive: 60                   # default 60
-s3a_threads_max: 256                # default 256
-s3a_threads_core: 15                # default 15
-s3a_max_total_tasks: 1000           # default 1000
-s3a_multipart_size: 104857600       # default 104857600  100 MiB
-s3a_multipart_threshold: 2147483647 # default 2147483647 2 GiB - 1 byte
+# S3A Configuration
+# Use these to have Hadoop use a Ceph endpoint
+s3a_endpoint: 's3.amazonaws.com'           # default 's3.amazonaws.com'
+s3a_ssl_enabled: 'true'                    # default true
+s3a_path_style_access: 'false'             # default false
 
-s3a_fast_upload: 'false'            # default false
-s3a_fast_buffer_size: 1048576       # default 1048576 1 MiB
-s3a_buffer_dir: '/tmp/s3a'
+# Defaults should be appropriate in Hadoop 2.8.1
+s3a_connection_max: 15                     # default 15
+s3a_attempts_max: 10                       # default 10
+s3a_conn_establish_timeout: 5000           # default 5000
+s3a_conn_timeout: 200000                   # default 200000
+s3a_page_max: 5000                         # default 5000
+s3a_threads_max: 10                        # default 10
+s3a_socket_send_buffer: 8192               # default 8192
+s3a_socket_recv_buffer: 8192               # default 8192
+s3a_keepalive: 60                          # default 60
+s3a_max_total_tasks: 5                     # default 5
+s3a_multipart_size: '100M'                 # default 100M
+s3a_multipart_threshold: 2147483647        # default 2147483647
+s3a_multiobjectdelete_enable: 'true'       # default true
+s3a_multipart_purge: 'false'               # default false
+s3a_multipart_purge_age: 86400             # default 86400
+
+# S3A defaults to AWSv4 signing in Hadoop 2.8.1
+# When using a Ceph release before Jewel, set to 'S3SignerType'
+# to force AWSv2 signing.
+s3a_signing_algorithm: ''                  # default ''
+
+s3a_buffer_dir: '${hadoop.tmp.dir}/s3a'    # default '${hadoop.tmp.dir}/s3a'
+s3a_block_size: '32M'                      # default 32M
+s3a_user_agent_prefix: ''                  # default ''
+s3a_readahead_range: '64K'                 # default '64K'
+
+# S3A with a disk buffer is pretty sane, so we turn it on
+s3a_fast_upload: 'true'                    # default 'false'
+s3a_fast_upload_buffer: 'disk'             # default 'disk'
+s3a_fast_upload_active_blocks: 8           # default 8
+s3a_input_fadvise: 'sequential'            # default 'sequential'
 
 # Hadoop
-hadoop_tmp_dir: '/home'
+hadoop_tmp_dir: '/tmp/hadoop-${user.name}' # default '/tmp/hadoop-${user.name}'
+
+# YARN supports S3A buckets for log aggregation in Hadoop 2.8.1.
+# This is useful if compute nodes have limited disk capacity.
+yarn_nm_remote_app_log_dir: '/tmp/logs'    # default '/tmp/logs'
+
+# Mappers will spill data here, so make sure you have enough capacity
+# defaults to  '${hadoop.tmp.dir}/nm-local-dir'
+yarn_nm_local_dirs: '${hadoop.tmp.dir}/nm-local-dir'
 
 # Spark
 limits_nofile_hard: 65536

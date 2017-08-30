@@ -1,5 +1,5 @@
 ---
-tarball_prefix: 'https://mmgaggle-bd.s3.amazonaws.com'
+tarball_prefix: 'https://bd-dist.s3.amazonaws.com'
 
 hadoop_tarball: 'hadoop-2.8.1.tar.gz'
 hive_tarball: 'apache-hive-2.2.0-bin.tar.gz'

@@ -8,6 +8,7 @@
   become_method: sudo
   vars_files:
     - "vars/{{ deploy_method }}.yml"
+    - "vars/resources.yml"
   roles:
     - { role: ansiblebit.oracle-java,
       oracle_java_set_as_default: yes,
