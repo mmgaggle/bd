@@ -3,7 +3,7 @@ tarball_prefix: 'https://bd-dist.s3.amazonaws.com'
 
 hadoop_tarball: 'hadoop-2.8.1.tar.gz'
 hive_tarball: 'apache-hive-2.2.0-bin.tar.gz'
-spark_tarball: 'spark-2.2.0-bin-without-hadoop.tgz'
+spark_tarball: 'spark-2.2.0-bin-without-hadoop-with-hive.tgz'
 
 presto_tarball: 'presto-server-0.170.tar.gz'
 presto_cli: 'presto-cli-0.170-executable.jar'

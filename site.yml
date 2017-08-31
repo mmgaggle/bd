@@ -20,5 +20,5 @@
     - hadoop-common
     - hive
     - spark
-    - maven
-    - hive-testbench
+#    - maven
+#    - hive-testbench

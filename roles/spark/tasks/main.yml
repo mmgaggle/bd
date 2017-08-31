@@ -31,14 +31,6 @@
   when:
   - master_group in group_names
 
-- name: Link Hadoop libraries
-  file: src=/hadoop/share/hadoop/tools/lib/{{ item }} dest=/hadoop/spark/jars/{{ item }} state=link
-  with_items:
-  - hadoop-aws-2.8.1.jar
-  - aws-java-sdk-core-1.10.6.jar
-  - aws-java-sdk-kms-1.10.6.jar
-  - aws-java-sdk-s3-1.10.6.jar
-
 - name: Link Spark libraries to Hive
   file: src=/hadoop/spark/jars/{{ item }} dest=/hadoop/hive/lib/{{ item }} state=link
   with_items:
