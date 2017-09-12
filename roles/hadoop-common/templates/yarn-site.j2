@@ -27,6 +27,7 @@
 {% else %}
     <value>{{ ( memtotal.stdout|int * 0.75 )|int }}</value>
 {% endif %}
+  </property>
   <property>
     <name>yarn.nodemanager.vmem-check-enabled</name>
     <value>false</value>
@@ -54,7 +55,6 @@
   <property>
       <name>yarn.nodemanager.remote-app-log-dir-suffix</name>
       <value>logs</value>
-  </property>
   </property>
   <property>
     <name>yarn.timeline-service.hostname</name>
