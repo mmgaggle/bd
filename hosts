@@ -7,3 +7,5 @@ localhost ansible_connection=local ansible_python_interpreter=/usr/local/bin/pyt
 # All other compute hosts should be in this host group
 [core]
 
+# Hosts that should run HDFS data nodes
+[hdfs]

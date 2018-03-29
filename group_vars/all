@@ -61,6 +61,12 @@ yarn_nm_remote_app_log_dir: '/tmp/logs'    # default '/tmp/logs'
 # defaults to  '${hadoop.tmp.dir}/nm-local-dir'
 yarn_nm_local_dirs: '${hadoop.tmp.dir}/nm-local-dir'
 
+# HDFS data node directories (can be multiple, comma sep)
+dfs_datanode_data_dir: '/hadoop/hdfs'
+
+# How much memory to give the name node in GB
+hdfs_namenode_memory: 32
+
 # Spark
 limits_nofile_hard: 65536
 limits_nofile_soft: 65536

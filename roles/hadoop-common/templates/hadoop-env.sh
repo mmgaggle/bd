@@ -48,6 +48,14 @@ for f in $HADOOP_HOME/contrib/capacity-scheduler/*.jar; do
   fi
 done
 
+#{% if ( memtotal.stdout|int * 0.25 ) > 8192 %}
+#    <value>{{ memtotal.stdout|int - 8192 }}</value>
+#{% else %}
+#    <value>{{ ( memtotal.stdout|int * 0.75 )|int }}</value>
+#{% endif %}
+# HADOOP_HEAPSIZE=1024
+# HADOOP_NAMENODE_OPTS=-Xms1024 -Xmx1024 -XX:+UseParNewGC -XX:+UseConcMarkSweepGC -XX:CMSInitiatingOccupancyFraction=70 -XX:+CMSParallelRemarkEnabled -XX:+PrintTenuringDistribution -XX:OnOutOfMemoryError={{AGENT_COMMON_DIR}}/killparent.sh
+
 # The maximum amount of heap to use, in MB. Default is 1000.
 #export HADOOP_HEAPSIZE=
 #export HADOOP_NAMENODE_INIT_HEAPSIZE=""
