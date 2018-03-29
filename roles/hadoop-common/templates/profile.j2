@@ -1,6 +1,6 @@
 export PATH=/hadoop/bin:$PATH
-export JAVA_HOME=/usr/java/jdk1.8.0_161
+export JAVA_HOME=/usr/java/jdk1.{{ oracle_java_version }}.0_{{ oracle_java_version_update }}
 export HADOOP_HOME=/hadoop
 export HADOOP_LIBEXEC_DIR=/hadoop/libexec
-export HADOOP_CLASSPATH=/hadoop/etc/hadoop:/hadoop/share/hadoop/common/lib/*:/hadoop/share/hadoop/common/*:/hadoop/share/hadoop/hdfs:/hadoop/share/hadoop/hdfs/lib/*:/hadoop/share/hadoop/hdfs/*:/hadoop/share/hadoop/yarn/lib/*:/hadoop/share/hadoop/yarn/*:/hadoop/share/hadoop/mapreduce/lib/*:/hadoop/share/hadoop/mapreduce/*:/usr/java/jdk1.8.0_161/lib:/hadoop/contrib/capacity-scheduler/*.jar:/hadoop/share/hadoop/tools/lib/*
+export HADOOP_CLASSPATH=/hadoop/etc/hadoop:/hadoop/share/hadoop/common/lib/*:/hadoop/share/hadoop/common/*:/hadoop/share/hadoop/hdfs:/hadoop/share/hadoop/hdfs/lib/*:/hadoop/share/hadoop/hdfs/*:/hadoop/share/hadoop/yarn/lib/*:/hadoop/share/hadoop/yarn/*:/hadoop/share/hadoop/mapreduce/lib/*:/hadoop/share/hadoop/mapreduce/*:/usr/java/jdk1.{{ oracle_java_version }}.0_{{ oracle_java_version_update }}/lib:/hadoop/contrib/capacity-scheduler/*.jar:/hadoop/share/hadoop/tools/lib/*
 export CLASSPATH=$HADOOP_CLASSPATH
