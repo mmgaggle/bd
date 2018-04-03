@@ -7,8 +7,8 @@ for functional and performance testing.
 
 Post deploy, the following software will be available inside the data lab:
 
-* Hadoop 2.7.3
-* Spark 2.1.1
+* Hadoop 2.8.1
+* Spark 2.2.0
 * Hive 2.2.1
 * Presto 0.177
 
